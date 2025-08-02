@@ -9,7 +9,7 @@ const Canvas = () => {
     const fabricCanvasRef = useRef(null)
     const initAttemptedRef = useRef(false)
 
-    const {setCanvas} = useEditorStore()
+    const {setCanvas, canvas} = useEditorStore()
 
     useEffect(() => {
 
@@ -23,7 +23,7 @@ const Canvas = () => {
         }
 
         fabricCanvasRef.current = null
-         setCanvas(null)
+        setCanvas(null)
       }
     }
 
@@ -32,6 +32,7 @@ const Canvas = () => {
     initAttemptedRef.current = false
 
       const initCanvas = async () => {
+        
        if(typeof window === undefined || !canvasRef.current || initAttemptedRef.current) {
           return 
        }
@@ -51,6 +52,7 @@ const Canvas = () => {
            setCanvas(fabricCanvas)
 
            console.log('Canvas init is done and set in store.')
+           console.log(canvas)
 
            //apply custom style for controller
 

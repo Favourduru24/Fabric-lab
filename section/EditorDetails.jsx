@@ -15,16 +15,22 @@ const EditorDetails = () => {
 
     const id = params?.slug
 
-    const [loading, setLoading] = useState(!!id) 
-    const [loadAttempted, setLoadAttempted] = useState(false)
-   const [error, setError] = useState('')
+    console.log({id})
 
-   const {canvas, setDesignId, resetStore} = useEditorStore()
+    const [loading, setLoading] = useState(!!id) 
+
+    const [loadAttempted, setLoadAttempted] = useState(false)
+
+   const [error, setError] = useState(null)
+
+   const {canvas, setId, resetStore, setName} = useEditorStore()
+
+    console.log({canvas})
 
     useEffect(() => {
        resetStore()
 
-       if(id) setDesignId(id)
+       if(id) setId(id)
 
         return () => {
            resetStore()
@@ -45,34 +51,24 @@ const EditorDetails = () => {
                  console.log('Canvas init timeout')
                  setLoading(false)
               }
-            
-              return () => clearTimeout(timer)
 
            }, 5000)
+
+           return () => clearTimeout(timer)
        }
     }, [loading, canvas, id])
 
 
     useEffect(() => {
-  if(canvas) {
-   console.log('Canvas is now available in editor')
-  }
+   if(canvas) {
+    console.log('Canvas is now available in editor')
+   }
     }, [canvas])
 
-     const responses = {
-         data: {
-           category: 'youtube',
-            name: 'canvas',
-           updatedDate: '',
-           height: 868,
-           width: 868,
-           canvasData: null 
-         }
-   }
     //load canvas
 
     const loadDesign = useCallback(async () => {
-       if(!canvas || !id || !loadAttempted) return
+       if(!canvas || !id || loadAttempted) return
 
        try {
           setLoading(true)
@@ -80,17 +76,34 @@ const EditorDetails = () => {
 
          //  const response = await getUserDesignById(id)
 
+           const responses = {
+         data: {
+           category: 'youtube',
+            name: 'canvas',
+           updatedDate: '',
+           height: 465,
+           width: 825,
+           canvasData: null 
+         }
+   }
+
           const design = responses?.data
 
+          console.log([design, responses])
+
           if(design) {
-             setDesignId(id)
+
+             setName(design.name)
+             
+             setId(id)
               
               try {
 
-                if(design?.canvasData) {
+                if(design.canvasData) {
                  canvas.clear()
+
                   if(design.height && design.width) {
-                      canvas.setDimension({
+                      canvas.setDimensions({
                          width: design.width,
                          height: design.height
                       })
@@ -98,25 +111,27 @@ const EditorDetails = () => {
 
                    const canvasData = typeof design.canvasData === 'string' ? JSON.parse(design.canvasData) : design.canvasData
                    
-                    const hasObject = canvasData.objects && canvasData?.objects?.length < 0
+                    const hasObject = canvasData.objects && canvasData?.objects?.length > 0
 
                     if(canvasData.background) {
+                     canvas.backgroundColor = canvasData.background
+                    } else {
                      canvas.backgroundColor = '#ffffff'
                     }
 
-                    if(hasObject){
+                    if(!hasObject){
                       canvas.renderAll()
                        return true
                     }
 
-                    canvas.loadFromJson(design.canvasData).then(canvas => canvas.requestRenderAll())
+                    canvas.loadFromJSON(design.canvasData).then((canvas) => canvas.requestRenderAll())
 
                 } else {
                    console.log('no canvas data')
                    canvas.clear()
                    canvas.setWidth(design.width)
                    canvas.setHeight(design.height)
-                  canvas.backgroundColor ='#000000'
+                  canvas.backgroundColor ='#ffffff'
                    canvas.renderAll()
                 }
               } catch (error) {
@@ -133,7 +148,7 @@ const EditorDetails = () => {
           setError('Failed to load design.')
           setLoading(false)
        }
-    }, [canvas, id, loadAttempted, setDesignId])
+    }, [canvas, id, loadAttempted, setId])
 
     useEffect(() => {
        if(id && canvas && !loadAttempted) {
@@ -141,7 +156,7 @@ const EditorDetails = () => {
        } else if(!id){
           router.replace('/') 
        }
-    }, [canvas, id, loadAttempted, loadDesign])
+    }, [canvas, id, loadAttempted, loadDesign, router])
    
 
   return (

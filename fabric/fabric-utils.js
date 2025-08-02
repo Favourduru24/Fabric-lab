@@ -17,15 +17,10 @@ export const initializeFabric = async (canvasEl, containerEl) => {
     return canvas
 
   } catch (error) {
-    console.error(error, 'Fabric to load fabric', error)
-   return null
+    console.error(error, 'Failed to load fabric', error)
+     return null
   }
  }
-
-
-
-
-
 
 
 export const centerCanvas = (canvas) => {
@@ -38,6 +33,7 @@ export const centerCanvas = (canvas) => {
    
    canvaswrapper.style.position = "absolute"
    canvaswrapper.style.top = "50%"
+   canvaswrapper.style.left = "50%"
    canvaswrapper.style.transform = "translate(-50%, -50%)"
 
 }

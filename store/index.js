@@ -5,18 +5,27 @@ import { create } from "zustand"
 export const useEditorStore = create((set, get) => ({
      canvas: null,
      setCanvas: (canvas) => {
-        set((canvas));
+        set({canvas});
         if(canvas) {
             centerCanvas(canvas)
         }
      },
 
-     designId: null,
-     setDesignId: (id) => set({designId: id}),
+     id: null,
+     setId: (id) => set({id}),
+
+     isEditing: null,
+     setIsEditing: (flag) => set({isEditing: flag}),
+
+     name: 'Untitled Design',
+     setName: (value) => set({name: value }),
+
      resetStore: () => {
         set({
+        name: 'Untitled Design',
          canvas: null,
-         designId: null
+         id: null,
+         isEditing: true
         })
      }
 }))

@@ -8,7 +8,9 @@ import {
     Printer,
     Sparkle,
     Wand2,
-    Upload
+    Upload,
+    Eye,
+    Pencil
 } from 'lucide-react'
 
 export const designTypes =[
@@ -74,3 +76,30 @@ export const designTypes =[
         
     },
 ]
+
+export const dropmenu = [
+       {
+        label: 'Editing',
+        value: 'Editing',
+        icon: <Pencil className='w-5 h-5'/>
+       },
+       {
+        label: 'Viewing',
+        value: 'Viewing',
+        icon: <Eye className='w-5 h-5'/>
+       },
+    ]
+
+
+export const colorPresets = [
+    "#FFFFFF",
+    "#F8F9FA",
+    "#E9ECEF",
+    "#DEE2E6",
+    "#000000",
+    "#E53935",
+    "#DB1860",
+    "#8E24AA",
+    "#5E3581",
+    "#3949AB"
+] 
