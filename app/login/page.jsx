@@ -7,7 +7,7 @@ import React from 'react'
      <div className='min-h-screen relative'>
        <div className='absolute inset-0 bg-cover bg-center' 
        style={{
-         backgroundImage: "url(https://static.canva.com/web/images/543d7829999d351b3.jpg)",
+         backgroundImage: "url(https://static.canva.com/web/images/543d7829999d351b301ced5ed3c1f087.jpg)",
        }}
        /> 
         <div className='absolute inset-0 '

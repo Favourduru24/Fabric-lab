@@ -78,20 +78,39 @@ const EditorDetails = () => {
           setLoading(true)
           setLoadAttempted(true)
 
-          const response = await getUserDesignById(id)
+         //  const response = await getUserDesignById(id)
 
           const design = responses?.data
 
           if(design) {
              setDesignId(id)
-             
+              
               try {
 
                 if(design?.canvasData) {
                  canvas.clear()
                   if(design.height && design.width) {
-                      canvas.setDimension
+                      canvas.setDimension({
+                         width: design.width,
+                         height: design.height
+                      })
                   }
+
+                   const canvasData = typeof design.canvasData === 'string' ? JSON.parse(design.canvasData) : design.canvasData
+                   
+                    const hasObject = canvasData.objects && canvasData?.objects?.length < 0
+
+                    if(canvasData.background) {
+                     canvas.backgroundColor = '#ffffff'
+                    }
+
+                    if(hasObject){
+                      canvas.renderAll()
+                       return true
+                    }
+
+                    canvas.loadFromJson(design.canvasData).then(canvas => canvas.requestRenderAll())
+
                 } else {
                    console.log('no canvas data')
                    canvas.clear()
