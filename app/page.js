@@ -1,29 +1,25 @@
- import LoginCard from '@/component/LoginCard'
-import Image from 'next/image'
-import React from 'react'
+ import AiFeaures from '@/component/AiFeaures'
+import Banner from '@/component/Banner'
+import DesignType from '@/component/DesignType'
+import Header from '@/component/Header'
+import Sidebar from '@/component/Sidebar'
+import RecentDesign from '@/section/RecentDesign'
  
  const Home = () => {
    return (
-     <div className='min-h-screen relative'>
-       <div className='absolute inset-0 bg-cover bg-center' 
-       style={{
-         backgroundImage: "url(https://static.canva.com/web/images/543d7829999d351b3.jpg)",
-       }}
-       /> 
-        <div className='absolute inset-0 '
-          style={{
-         background: "linear-gradient(180deg, rgba(0,0,0,0.8), rgba(0,0,0,0.4), rgba(0,0,0,0.8))"
-       }}
-        />
-        <div className='absolute top-4 left-4 z-10'>
-           <p className='text-white font-semibold text-2xl italic'>Fabric-lab</p>
-        </div>  
-
-        <div className='relative z-10 flex items-center justify-center min-h-screen'>
-           <LoginCard/>  
-        </div>
+     <div className='flex min-h-screen bg-white'>
+        <Sidebar/>
+         <div className='flex-1 flex flex-col ml-[72px]'>
+           <Header />
+            <main className='flex-1 p-6 overflow-y-auto pt-20'>
+                <Banner/>
+                <DesignType />
+                <AiFeaures/>
+                <RecentDesign/>
+            </main>
+         </div>
      </div>
    )
  }
  
- export default Home 
+ export default Home
