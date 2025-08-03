@@ -103,3 +103,35 @@ export const colorPresets = [
     "#5E3581",
     "#3949AB"
 ] 
+
+export const textPresets = [
+  {
+    name: 'Heading',
+    Text: 'Add a heading',
+    fontSize: 36,
+    fontWeight: 'bold',
+    fontFamily: 'Inter, sans-san-serif'
+  },
+  {
+    name: 'Subheading',
+    Text: 'Add a subheading',
+    fontSize: 24,
+    fontWeight: 'bold',
+    fontFamily: 'Inter, sans-san-serif'
+  },
+  {
+    name: 'Body Text',
+    Text: 'Add a litle text.',
+    fontSize: 16,
+    fontWeight: 'normal',
+    fontFamily: 'Inter, sans-san-serif'
+  },
+  {
+    name: 'Caption',
+    Text: 'Add a caption.',
+    fontSize: 12,
+    fontWeight: 'normal',
+    fontFamily: 'Inter, sans-san-serif',
+    fontStyle: 'normal'
+  },
+]
