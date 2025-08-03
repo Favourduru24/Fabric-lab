@@ -1,5 +1,6 @@
 'use client'
 
+import { addShapeToCanvas } from "@/fabric/fabric-utils"
 import { shapeDefinitions, shapeTypes } from "@/fabric/shape-utils"
 import { useEditorStore } from "@/store"
 import { useEffect, useRef, useState } from "react"
@@ -9,8 +10,8 @@ function ElementPanel () {
 
     
    const {canvas} = useEditorStore()
-   const miniCanvasRef = useRef()
-   const canvasElementRef = useRef()
+   const miniCanvasRef = useRef({})
+   const canvasElementRef = useRef({})
    const [isInitialized, setIsInitialized] = useState(false)
 
    useEffect(() => {
@@ -39,7 +40,7 @@ function ElementPanel () {
             const miniCanvas = new fabric.StaticCanvas(canvasId, {
               width: 100,
               height: 100,
-              backgroundColor: 'transperent',
+              backgroundColor: 'transparent',
               renderOnAddRemove: true
             })
 
@@ -86,6 +87,10 @@ function ElementPanel () {
       }
    }
 
+   const handleShapeClick = (type) => {
+       addShapeToCanvas(canvas, type)
+   }
+
   return (
     <div
      className="h-full overflow-y-auto"
@@ -93,7 +98,7 @@ function ElementPanel () {
       <div className="p-4">
         <div className="grid grid-cols-3 gap-1">
         {shapeTypes.map(shapeType => (
-           <div key={shapeType} style={{height: '90px'}} className="cursor-pointer flex flex-col items-center justify-center">
+           <div key={shapeType} onClick={() => handleShapeClick(shapeType)} style={{height: '90px'}} className="cursor-pointer flex flex-col items-center justify-center">
               <canvas width="100" height="100" ref={(el) => setCanvasRef(el, shapeType)}/>
            </div>
         ))}

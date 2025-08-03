@@ -1,3 +1,4 @@
+import { shapeDefinitions } from './shape-utils'
 
 export const initializeFabric = async (canvasEl, containerEl) => {
  try {
@@ -37,4 +38,51 @@ export const centerCanvas = (canvas) => {
    canvaswrapper.style.transform = "translate(-50%, -50%)"
 
 }
+
+ const createShape = (fabric, type, shapeDefinitions, customProps = {}) => {
+   const definition = shapeDefinitions(type)
+
+   if(!definition) return null
+
+   const props = {...definition.defaultProps, ...customProps}
+
+   switch (definition.type) {
+    case "rect":
+        return new fabric.Rect(props)
+
+     case "cicle":
+        return new fabric.Circle(props)
+
+    default:
+       return null
+   }
+    
+ }
+
+export const addShapeToCanvas = async (canvas, shapeTypes, customProps={}) => {
+
+  if(!canvas) return null
+
+  try {
+    const fabricModule = await import('fabric') 
+
+    const shape = createShape(fabricModule,shapeTypes, shapeDefinitions, {
+       left: 100,
+       top: 100,
+       ...customProps 
+    })
+
+     if(shape) {
+       shape.id = `${shapeTypes}-${Date.now()}` 
+       canvas.add(shape)
+       canvas.renderAll()
+       canvas.setActiveObject(shape)
+       return shape
+     }
+  } catch (error) {
+    
+  }
+} 
+
+
 

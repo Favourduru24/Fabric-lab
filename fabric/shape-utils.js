@@ -20,8 +20,28 @@ export const shapeDefinitions = {
 
        canvas.add(rect)
    }
+   },
+
+   circle: {
+     type: 'circle',
+     label: 'Circle',
+     defaultProps: {
+        radius: 50,
+        fill: '#000000'
+     },
+     thumbnail: (fabric, canvas)  => {
+      const {Circle} = fabric 
+      const circle = new Circle({
+         left: 20,
+         top: 20,
+         radius: 30,
+         fill: '#000000'
+      })
+
+       canvas.add(circle)
+   }
    }
    
 }
  
-export const shapeTypes = ['rectangle'] 
+export const shapeTypes = ['rectangle', 'circle'] 
