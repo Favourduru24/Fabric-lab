@@ -10,7 +10,9 @@ import {
     Wand2,
     Upload,
     Eye,
-    Pencil
+    Pencil,
+    EraserIcon,
+    Paintbrush,
 } from 'lucide-react'
 
 export const designTypes =[
@@ -143,4 +145,39 @@ export const brushSize = [
     {valuse: 20, label: 'Extra Large'},
 ]
 
-// export const 
+export const drawPanelColorPreset = [
+   '#000000',
+   '#FFFFFF',
+   '#FF0000',
+   '#00FF00',
+   '#0000FF',
+   '#FFDIDC',
+   '#FFADAD',
+   '#FFD6A5',
+   '#FDFFB6',
+   '#CAFFBF',
+   '#FF9900',
+   '#9900FF',
+   '#FF00FF',
+    "#DB1860",
+    "#8E24AA",
+    "#5E3581",
+ ]
+
+ export const tablet = [
+    {
+       label: 'Color',
+       icon: <Palette className='h-4 w-4 text-gray-300'/>,
+       id: 1
+    },
+    {
+       label: 'Brush',
+       icon: <Paintbrush className='h-4 w-4 text-gray-300'/>,
+       id:2
+    },
+    {
+       label: 'Tools',
+       icon: <EraserIcon className='h-4 w-4 text-gray-300'/>,
+       id:3
+    },
+]
