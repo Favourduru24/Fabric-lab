@@ -7,8 +7,8 @@ export const shapeDefinitions = {
         height: 60,
         fill: '#000000'
      },
-   },
-   thumbnail: (fabric, canvas)  => {
+      
+     thumbnail: (fabric, canvas)  => {
       const {Rect} = fabric 
       const rect = new Rect({
          left: 15,
@@ -17,10 +17,11 @@ export const shapeDefinitions = {
          height: 35,
          fill: '#000000'
       })
+
        canvas.add(rect)
    }
+   }
+   
 }
  
-export const shapeTypes = [
-     'rectangle'
-]
+export const shapeTypes = ['rectangle'] 
