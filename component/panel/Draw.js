@@ -2,7 +2,7 @@
 
 import { drawPanelColorPreset, tablet } from "@/constant"
 import { useEditorStore } from "@/store"
-import { EraserIcon, Minus, Paintbrush, Palette, PencilIcon } from "lucide-react"
+import { EraserIcon, Minus, Paintbrush, Palette, PencilIcon, Plus } from "lucide-react"
 import { useState } from "react"
 
  
@@ -96,8 +96,11 @@ function DrawPanel () {
                  {tabClick.id === 2 && <div className="w-full space-y-4">
                      <h3 className="text-gray-400 font-semibold">Brush Size</h3>
                      <div className="flex items-center space-x-3">
-                      <Minus className="h-1 w-4 text-gray-500"/>
+                      <Minus className="h-4 w-4 text-gray-500 whitespace-nowrap cursor-pointer"/>
+                      <input type="range" max="10" min="1" step="0.01" className="flex-1  accent-black-500 h-[4px] transition-all transition-transform" value={brushWidth} onChange={(value) =>  setBrushWidth(value)}/>
+                      <Plus className="h-4 w-4 text-gray-500 whitespace-nowrap cursor-pointer"/>
                      </div>
+                     
                     </div> }
                </div>
             </>
