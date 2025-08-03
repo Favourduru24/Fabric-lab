@@ -135,3 +135,12 @@ export const textPresets = [
     fontStyle: 'normal'
   },
 ]
+
+export const brushSize = [
+    {valuse: 2, label: 'small'},
+    {valuse: 8, label: 'Medium'},
+    {valuse: 10, label: 'Large'},
+    {valuse: 20, label: 'Extra Large'},
+]
+
+// export const 
