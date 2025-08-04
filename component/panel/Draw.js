@@ -1,6 +1,7 @@
 'use client'
 
 import { brushSize, drawPanelColorPreset, tablet } from "@/constant"
+import { toggleDrawingMode, toggleEraserMode, updateDrawingBrush } from "@/fabric/fabric-utils"
 import { useEditorStore } from "@/store"
 import { Droplets, EraserIcon, Minus, Paintbrush, Palette, PencilIcon, Plus } from "lucide-react"
 import { useState } from "react"
@@ -24,30 +25,50 @@ function DrawPanel () {
 
     
    const handleToggleDrawwingMode = () => {
+       if(!canvas) return
+
       const newMode = !isDrawingMode
       setIsDrawingMode(newMode)
 
       if(newMode && isErasing) {
         setIsErasing(false)
       }
+
+      toggleDrawingMode(canvas, newMode, drawingColor, brushWidth)
    }
 
-   const handleDrwingColorChage = (color) => {
+   const handleDrawingColorChage = (color) => {
      setDrawingColor(color)
+
+     if(canvas && isDrawingMode && !isErasing) {
+       updateDrawingBrush(canvas, {color})
+     }
    }
 
    const handleBrushWidthChange = (width) => {
       setBrushWidth(width)
+
+      if(canvas && isDrawingMode && !isErasing) {
+       updateDrawingBrush(canvas, {width: isErasing ?  width * 2 : width})
+     }
    }
 
    const handleDrawingOpacityChange = (value) => {
       const opacity = Number(value.target.value)
        setDrawingingOpacity(opacity)
+
+       if(canvas && isDrawingMode && !isErasing) {
+       updateDrawingBrush(canvas, {opacity:  opacity / 100})
+     }
    }
 
    const handleToggleErasing = () => {
+      if(!canvas && !isDrawingMode) return
+
      const newErasing = !isErasing
      setIsErasing(newErasing)
+
+     toggleEraserMode(canvas, newErasing, drawingColor, brushWidth * 2)
    }
 
   return (
@@ -83,20 +104,21 @@ function DrawPanel () {
                           {drawPanelColorPreset.map((color) => (
                        <div key={color} >
                                                                            <button style={{backgroundColor: color}} 
-                    className={`w-10 h-10 rounded-full border transition-transform hover:scale-110 ${color === drawingColor ? 'ring-1 ring-offset-2 ring-primary' : 'cursor-pointer'}`}                                                />
+                    className={`w-10 h-10 rounded-full border transition-transform hover:scale-110 ${color === drawingColor ? 'ring-1 ring-offset-2 ring-primary' : 'cursor-pointer'}`}  
+                    onClick={() => handleDrawingColorChage(color)}                                              />
                        </div>
                           ))}
                         </div>
 
                   <div className="flex mt-5 space-x-2 items-center">
                    <div className="relative">
-                     <input type="color" value={drawingColor} onChange={(e) => handleDrwingColorChage(e.target.value)} 
+                     <input type="color" value={drawingColor} onChange={(e) => handleDrawingColorChage(e.target.value)} 
                       className={`w-12 h-10 p-1 cursor-pointer`}
                        disabled={isErasing}
                      />
                    </div>
                     <input type="text" value={drawingColor} className="flex-1 border shadow-sm shadow-white text-gray-500 rounded-md border-gray-400 h-8" placeholder={drawingColor}
-                onChange={(e) => handleDrwingColorChage(e.target.value)}
+                onChange={(e) => handleDrawingColorChage(e.target.value)}
                 disabled={isErasing}
                />
                   </div>
