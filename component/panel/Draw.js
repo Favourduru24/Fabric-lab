@@ -1,8 +1,8 @@
 'use client'
 
-import { drawPanelColorPreset, tablet } from "@/constant"
+import { brushSize, drawPanelColorPreset, tablet } from "@/constant"
 import { useEditorStore } from "@/store"
-import { EraserIcon, Minus, Paintbrush, Palette, PencilIcon, Plus } from "lucide-react"
+import { Droplets, EraserIcon, Minus, Paintbrush, Palette, PencilIcon, Plus } from "lucide-react"
 import { useState } from "react"
 
  
@@ -12,8 +12,8 @@ function DrawPanel () {
    const [isDrawingMode, setIsDrawingMode] = useState(false)
    const [isErasing, setIsErasing] = useState(false)
    const [drawingColor, setDrawingColor] = useState("#000000")
-   const [brushWidth, setBrushWidth] = useState(5)
-   const [drawingOpacity, setBrushingOpacity] = useState(100)
+   const [brushWidth, setBrushWidth] = useState(8)
+   const [drawingOpacity, setDrawingingOpacity] = useState(100)
    const [activeTab, setActiveTab] = useState('colors')
 
    const [tabClick, setTabClick] = useState({
@@ -22,10 +22,7 @@ function DrawPanel () {
        id: 1
     },)
 
-   const [color, setColor] = useState(false)
-   const [brush, setBrush] =useState(false)
-   const [tools, setTools] = useState(false)
-
+    
    const handleToggleDrawwingMode = () => {
       const newMode = !isDrawingMode
       setIsDrawingMode(newMode)
@@ -37,6 +34,20 @@ function DrawPanel () {
 
    const handleDrwingColorChage = (color) => {
      setDrawingColor(color)
+   }
+
+   const handleBrushWidthChange = (width) => {
+      setBrushWidth(width)
+   }
+
+   const handleDrawingOpacityChange = (value) => {
+      const opacity = Number(value.target.value)
+       setDrawingingOpacity(opacity)
+   }
+
+   const handleToggleErasing = () => {
+     const newErasing = !isErasing
+     setIsErasing(newErasing)
    }
 
   return (
@@ -93,16 +104,55 @@ function DrawPanel () {
                   }
                    
 
-                 {tabClick.id === 2 && <div className="w-full space-y-4">
+                 {tabClick.id === 2 && 
+                  <>
+                 <div className="w-full space-y-4">
                      <h3 className="text-gray-400 font-semibold">Brush Size</h3>
                      <div className="flex items-center space-x-3">
                       <Minus className="h-4 w-4 text-gray-500 whitespace-nowrap cursor-pointer"/>
-                      <input type="range" max="10" min="1" step="0.01" className="flex-1  accent-black-500 h-[4px] transition-all transition-transform" value={brushWidth} onChange={(value) =>  setBrushWidth(value)}/>
+                      <input type="range" max="20" min="1" step="0.01" className="flex-1  accent-black-500 h-[4px] transition-all transition-transform" value={brushWidth} onChange={(e) =>  setBrushWidth(e.target.value)}/>
                       <Plus className="h-4 w-4 text-gray-500 whitespace-nowrap cursor-pointer"/>
                      </div>
-                     
-                    </div> }
+                    </div>
+
+                    <div className="flex items-center gap-1 mt-5 w-full gap-1">
+                              {brushSize.map((brush) => (
+                                 <button key={brush.value}
+                                  className={`px-2 py-1 h-auto border border-gray-400 shadow-md shadow-white w-fit rounded-md text-gray-400 whitespace-nowrap font-semibold text-sm ${brushWidth === brush.value ? 'bg-gray-50' : 'bg-transparent cursor-pointer'}` } onClick={() => handleBrushWidthChange(brush.value)}
+                                 >
+                                    {brush.label}
+                                 </button>
+                              ))}
+                       </div>
+
+                        <div className="space-y-2 mt-4">
+                           <div className="flex justify-between items-center">
+                              <div className="flex gap-2 items-center">
+                                <Droplets className="mr-2 h-4 w-4 text-gray-500"/>
+                             <h3 className="text-gray-400 font-semibold">Opacity
+                               </h3>
+                              </div>
+                               <span className="text-sm font-medium text-gray-400">{drawingOpacity}%</span>
+                              
+                           </div>
+
+                           <input type="range" max="100" min="1" step="1" className="flex-1  accent-black-500 h-[4px] transition-all transition-transform w-full" value={drawingOpacity} onChange={(value) => handleDrawingOpacityChange(value)}/>
+                        </div>
+                  </>
+                     }
                </div>
+
+               {tabClick.id === 3
+                && 
+               <button 
+                className={`w-full py-4 border-2 flex items-center justify-center rounded-lg cursor-pointer gap-2 shadow-md transition-color ${isErasing ? 'bg-red-500 text-white' : 'bg-transparent text-gray-400'}`}
+                onClick={handleToggleErasing}
+               >
+                  
+                    <EraserIcon className="w-5 h-5"/>
+                    <p className=" font-semibold">{isErasing ? 'Stop Erasing' : 'Eraser Mode'}</p>
+                </button>
+                }
             </>
            }
        </div>
