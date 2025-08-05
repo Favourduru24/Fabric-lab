@@ -105,6 +105,20 @@ function Property() {
       canvas.renderAll()
     }
 
+    const handleFlipHorizontal = () => {
+       if(!canvas || !selectedObj) return
+
+       const flipX = !selectedObj.flipX
+       updateObjectProperty('flipX', flipX)
+    }
+
+    const handleFlipVertical = () => {
+          if(!canvas || !selectedObj) return
+
+       const flipY = !selectedObj.flipY
+       updateObjectProperty('flipY', flipY)
+    }
+
     const handleTextChange = (e) => {
        
     }
@@ -182,12 +196,12 @@ function Property() {
            </div>
               
               <div className="flex flex-wrap gap-3">
-                   <button className="flex items-center gap-2 h-9 px-3 py-2 w-28 shadow-sm rounded-sm cursor-pointer">
+                   <button className="flex items-center gap-2 h-9 px-3 py-2 w-28 shadow-sm rounded-sm cursor-pointer" onClick={handleFlipHorizontal}>
                     <FlipHorizontal className="w-5 h-5 text-gray-400"/>
                  <p className="text-sm text-gray-500 font-semibold">Flip H</p>
                    </button>
 
-                   <button className="flex items-center gap-2 h-9 px-3 py-2 w-28 shadow-sm rounded-sm cursor-pointer">
+                   <button className="flex items-center gap-2 h-9 px-3 py-2 w-28 shadow-sm rounded-sm cursor-pointer" onClick={handleFlipVertical}>
                     <FlipHorizontal className="w-5 h-5 text-gray-400"/>
                  <p className="text-sm text-gray-500 font-semibold">Flip V</p>
                    </button>
