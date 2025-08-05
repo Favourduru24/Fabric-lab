@@ -138,11 +138,7 @@ function Property() {
     const handleLetterSpacingChange = (e) => {
        
     }
-
-    const handleLetterSpacingChanges  = (e) => {
-       
-    }
-
+     
     
 
 
