@@ -61,7 +61,7 @@ function SettingPanel  () {
                </div>
            </div>
            <div className="my-4"/>
-            <button className={`w-full text-white bg-black rounded-md py-3 font-semibold text-[1rem] cursor-pointer`} onClick={handleApplyChanges}>
+            <button className={`w-full text-white bg-purple-600 hover:bg-purple-700 transition-all rounded-md py-3 font-semibold text-[1rem] cursor-pointer`} onClick={handleApplyChanges}>
                Apply Changes
             </button>
         </div>

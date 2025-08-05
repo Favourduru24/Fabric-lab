@@ -15,6 +15,22 @@ const Canvas = () => {
 
     const cleanUpCanvas = () => {
 
+       if(fabricCanvasRef.current) {
+
+         try {
+
+          fabricCanvasRef.current.off()
+
+           fabricCanvasRef.current.off('object:added')
+           fabricCanvasRef.current.off('object:modified')
+           fabricCanvasRef.current.off('object:removed')
+           fabricCanvasRef.current.off('path:created')
+           
+         } catch (error) {
+           console.error('Error removing event listener')
+         }
+       }
+
       if(fabricCanvasRef.current) {
         try {
               fabricCanvasRef.current.dispose()
@@ -57,6 +73,17 @@ const Canvas = () => {
            //apply custom style for controller
 
            //setup evennt listenners
+
+            const handleCanvasChange = () => {
+              //implement the auto save feature here 
+              console.log('Canvas Object Change || path change')
+            }
+
+           fabricCanvas.on('object:added', handleCanvasChange)
+           fabricCanvas.on('object:modified', handleCanvasChange)
+           fabricCanvas.on('object:removed', handleCanvasChange)
+           fabricCanvas.on('path:created', handleCanvasChange)
+           
 
        } catch (error) {
          console.error('Failed to initialize canvas', error)

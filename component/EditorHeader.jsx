@@ -1,6 +1,6 @@
 'use client'
 import DropDown from './DropDown'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { dropmenu } from '@/constant'
 import { useEditorStore } from '@/store'
 import { Save, Search, Star } from 'lucide-react'
@@ -8,7 +8,16 @@ import { Save, Search, Star } from 'lucide-react'
 const EditorHeader = () => {
     
      const [select, setSelect] = useState('')
-     const {isEditing, setIsEditing, name, setName} = useEditorStore()
+     const {isEditing, setIsEditing, name, setName, canvas} = useEditorStore()
+
+     useEffect(() => {
+         if(!canvas) return
+         canvas.selection = isEditing
+          canvas.getObjects().forEach((obj) => {
+            obj.selectable = isEditing
+            obj.evented = isEditing
+          })
+     }, [isEditing])
 
   return (
     <header className='flex px-4 justify-between items-center bg-gradient-to-r from-[#00c4cc] via-[#8b3dff] to-[#5533ff] h-14 py-2'>

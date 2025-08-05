@@ -7,6 +7,7 @@ import { useParams, useRouter} from "next/navigation"
 import { useState, useEffect, useCallback} from "react"
 import { useEditorStore } from "@/store"
 import { getUserDesignById } from "@/services/design-service"
+import Property from "@/component/properties"
 
 const EditorDetails = () => {
 
@@ -23,7 +24,7 @@ const EditorDetails = () => {
 
    const [error, setError] = useState(null)
 
-   const {canvas, setId, resetStore, setName} = useEditorStore()
+   const {canvas, setId, resetStore, setName, setShowProperties, showProperties, isEditing} = useEditorStore()
 
     console.log({canvas})
 
@@ -157,6 +158,35 @@ const EditorDetails = () => {
           router.replace('/') 
        }
     }, [canvas, id, loadAttempted, loadDesign, router])
+
+    useEffect(() => {
+     if(!canvas) return
+
+      const handleSelectionCreated = () => {
+          const activeObject = canvas.getActiveObject()
+
+          console.log(activeObject)
+
+          if(activeObject) {
+             setShowProperties(true)
+          }
+      } 
+
+      const handleSelectionCleared = () => {
+         setShowProperties(false)
+      }      
+
+      canvas.on('selection:created', handleSelectionCreated)
+      canvas.on('selection:updated', handleSelectionCreated)
+      canvas.on('selection:cleared', handleSelectionCleared)
+
+      return () => {
+       canvas.off('selection:created', handleSelectionCreated)
+      canvas.off('selection:updated', handleSelectionCreated)
+      canvas.off('selection:cleared', handleSelectionCleared)
+      }
+
+    }, [canvas])
    
 
   return (
@@ -165,13 +195,18 @@ const EditorDetails = () => {
     >
       <EditorHeader/>
        <div className="flex flex-1 overflow-hidden">
-        <EditorSideBar/>
+         {isEditing && 
+         <EditorSideBar/>
+         }
          <div className="flex-1 flex flex-col overflow-hidden relative">
          <main className="flex-1 overflow-hiddden bg-[#f0f0f0] flex items-center justify-center">
             <Canvas  />
          </main>
          </div>
        </div>
+        {
+         showProperties && isEditing &&  <Property/>
+        }
     </div>
   )
 }

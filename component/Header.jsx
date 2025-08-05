@@ -6,6 +6,7 @@ import { Search } from "lucide-react"
 const Header = () => {
  const {data:session } = useSession()
  
+ 
   return (
     <header className="h-16 border-b hover:gray-200 bg-white flex items-center px-6 fixed top-0 right-0 left-[72px] z-10">
          <div className="flex-1 max-w-2xl mx-auto relative items-center">

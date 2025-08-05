@@ -222,3 +222,51 @@ export const toggleEraserMode = (canvas, isErasing, previousColor = '#000000', e
     }
 
   }
+
+  export const cloneSelectedCanvas = async (canvas) => {
+   if(!canvas) return
+
+   const activeObject = canvas.getActiveObject()
+
+    if(!activeObject) return
+
+    try {
+       const cloneObj = await activeObject.clone()
+     
+        cloneObj.set({
+           left: activeObject.left + 10,
+           top: activeObject.top + 10,
+           id: `${activeObject.type || 'object'}-${Date.now()}`
+        })
+
+      canvas.add(cloneObj)
+      canvas.renderAll()
+
+      return cloneObj
+
+    } catch (error) {
+      console.error('Error while cloning') 
+      return null
+    }
+  }
+
+  export const deleteSelectedCanvas = (canvas) => {
+    if(!canvas) return
+
+   const activeObject = canvas.getActiveObject()
+
+    if(!activeObject) return
+
+    try {
+
+       canvas.remove(activeObject)
+       canvas.discardActiveObject()
+       canvas.renderAll()
+      
+       return true
+
+    } catch (error) {
+       console.log('Error deleting canvas object.')
+       return false
+    }
+  }
