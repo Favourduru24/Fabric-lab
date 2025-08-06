@@ -10,6 +10,7 @@ function Property() {
   const {canvas} = useEditorStore()
 
    const [selectedObj, setSelectedObj] = useState(null)
+   const [objectType, setObjectType] = useState('')
    const [opacity, setOpacity] = useState(100)
    const [width, setWidth] = useState(0)
    const [height, setHeight] = useState(0)
@@ -34,13 +35,23 @@ function Property() {
         const activeObject = canvas.getActiveObject() 
 
         if(activeObject) {
+          
           setSelectedObj(activeObject)
           setOpacity(Math.round(activeObject.opacity * 100) || 100)
 
         setWidth(Math.round(activeObject.width * activeObject.scaleX))
 
         setHeight(Math.round(activeObject.height * activeObject.scaleY))
-
+            
+            if(activeObject.type === 'i-text'){
+               setObjectType('text')
+            } else if(activeObject.type === 'image') {
+                 setObjectType('image')
+            } else if(activeObject.type === 'path') {
+                  setObjectType('path')
+            } else {
+               setObjectType('shape')
+            }
         }
       }
 
@@ -236,6 +247,36 @@ function Property() {
                      </button>
                 </div>
                </div>
+                   {/* Text related properties */}
+                  {
+                    objectType === 'text' && (
+                   <div className="space-y-4 border-t">
+                       <h3 className="text-sm font-semibold text-gray-500 mt-1">Text Properties</h3>
+                       <div className="space-y-2">
+                       <p className="text-xs font-semibold text-gray-500">Text Content</p>
+                          <textarea 
+              className='resize-none min-h-[200px] placeholder:text-gray-400 placeholder:font-medium font-medium w-full p-2 rounded-md text-gray-400 outline-purple-300 shadow-sm text-lg '
+               value={text}
+               onChange={handleTextChange}
+              >
+                 
+              </textarea>
+                        </div>
+                       <div className="space-y-2">
+                       <p className="text-xs font-semibold text-gray-500">Font Size</p>
+                          <input
+               className='resize-none min-h-[100px]  placeholder:text-gray-400 placeholder:font-medium  font-medium w-full p-2 rounded-md text-gray-400  outline-purple-300 shadow-sm text-lg '
+                value={fontSize}
+                onChange={(e) => handleFontSizeChange(e)}
+                type="number"
+               />
+                 
+               
+                        </div>
+                 </div> 
+                    )
+                  }
+                
           </div>
          </div>
     )

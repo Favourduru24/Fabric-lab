@@ -181,3 +181,14 @@ export const drawPanelColorPreset = [
        id:3
     },
 ]
+
+ export const fontFamilies = [
+    "Arial",
+    "Helvetica",
+    "Times New Roman",
+    "Courier New",
+    "Georgia",
+    "Verdana",
+    "Comic Sans MS",
+    "Impact"
+ ]
