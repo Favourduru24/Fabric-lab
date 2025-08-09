@@ -1,4 +1,4 @@
-import { initializeFabric } from '@/fabric/fabric-utils'
+import { customizeBoundaryBox, initializeFabric } from '@/fabric/fabric-utils'
 import { useEditorStore } from '@/store'
 import { useEffect, useRef } from 'react'
 
@@ -9,7 +9,7 @@ const Canvas = () => {
     const fabricCanvasRef = useRef(null)
     const initAttemptedRef = useRef(false)
 
-    const {setCanvas, canvas} = useEditorStore()
+    const {setCanvas, canvas, markAsModified} = useEditorStore()
 
     useEffect(() => {
 
@@ -71,11 +71,12 @@ const Canvas = () => {
            console.log(canvas)
 
            //apply custom style for controller
+           customizeBoundaryBox(fabricCanvas)
 
            //setup evennt listenners
 
             const handleCanvasChange = () => {
-              //implement the auto save feature here 
+              //  markAsModified()
               console.log('Canvas Object Change || path change')
             }
 

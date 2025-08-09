@@ -3,11 +3,13 @@ import DropDown from './DropDown'
 import { useEffect, useState } from 'react'
 import { dropmenu } from '@/constant'
 import { useEditorStore } from '@/store'
-import { Save, Search, Star } from 'lucide-react'
+import { Download, Save, Search, Star } from 'lucide-react'
+import ExportModel from '@/section/ExportModel'
 
 const EditorHeader = () => {
     
      const [select, setSelect] = useState('')
+     const [show, setShow] = useState(false)
      const {isEditing, setIsEditing, name, setName, canvas} = useEditorStore()
 
      useEffect(() => {
@@ -19,14 +21,21 @@ const EditorHeader = () => {
           })
      }, [isEditing])
 
+     const handleToggleModal = () => {
+       setShow((prev) => !prev)
+     }
+
   return (
     <header className='flex px-4 justify-between items-center bg-gradient-to-r from-[#00c4cc] via-[#8b3dff] to-[#5533ff] h-14 py-2'>
        <div className='flex items-center space-x-4 '>
             <DropDown options={dropmenu} value={select} onChange={(value) => setSelect(value)} placeholder={isEditing ? 'Editing' : 'Viewing'} 
               /> 
 
-              <button className='w-5 h-5 relative '>
-           <Save/>
+              <button className='relative '>
+           <Save className='w-6 h-6 cursor-pointer'/>
+        </button> 
+              <button className='relative' onClick={() => setShow(true)}>
+           <Download className='w-6 h-6 cursor-pointer' onClick={handleToggleModal}/>
         </button> 
        </div>
         
@@ -46,6 +55,7 @@ const EditorHeader = () => {
               <DropDown options={dropmenu} value={select} onChange={(value) => setSelect(value)} placeholder={isEditing ? 'Editing' : 'Viewing'} 
               /> 
           </div>
+          <ExportModel isOpen={show} onChange={handleToggleModal} isClosed={setShow}/>
     </header>
   )
 }

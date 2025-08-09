@@ -183,12 +183,70 @@ export const drawPanelColorPreset = [
 ]
 
  export const fontFamilies = [
-    "Arial",
-    "Helvetica",
-    "Times New Roman",
-    "Courier New",
-    "Georgia",
-    "Verdana",
-    "Comic Sans MS",
-    "Impact"
+    {
+        value: "Arial",
+        label: "Arial",
+    },
+    {
+     value: "Helvetica",
+     label: "Helvetica",
+    },
+    {
+     value: "Times New Roman",
+     label: "Times New Roman",
+    },
+    {
+     value: "Courier New",
+     label: "Courier New",
+    },
+    {
+     value: "Verdana",
+     label: "Verdana",
+    },
+    {
+     value: "Comic Sans MS",
+     label: "Comic Sans MS",
+    },
+    {
+     value: "Impact",
+     label: "Impact",
+    }
+ ]
+
+ export const borderStyles = [
+    {
+        value: "solid",
+        label: "solid",
+    },
+    {
+     value: "dashed",
+     label: "dashed",
+    },
+    {
+     value: "dotted",
+     label: "dotted",
+    }
+ ]
+
+ export const imageFilter = [
+    {
+        value: "none",
+        label: "none",
+    },
+    {
+     value: "grayscale",
+     label: "grayscale",
+    },
+    {
+     value: "sepia",
+     label: "sepia",
+    },
+    {
+     value: "invert",
+     label: "invert",
+    },
+    {
+     value: "blur",
+     label: "blur",
+    },
  ]

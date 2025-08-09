@@ -270,3 +270,35 @@ export const toggleEraserMode = (canvas, isErasing, previousColor = '#000000', e
        return false
     }
   }
+
+  export const customizeBoundaryBox = (canvas) => {
+    if(!canvas) return
+
+    try {
+      canvas.on('object:added', (e) => {
+        if(e.target){
+          e.target.set({
+             borderColor: '#00ffe7',
+             cornerColor: '#000000',
+             cornerStrokeColor: '#00ffe7',
+             cornerSize: 10,
+             transparentCorners: false
+          })
+        }
+      })  
+      
+      canvas.getObjects().forEach(obj => {
+         obj.set({
+            borderColor: '#00ffe7',
+             cornerColor: '#000000',
+             cornerStrokeColor: '#00ffe7',
+             cornerSize: 10,
+             transparentCorners: false
+         })
+      })
+
+       canvas.renderAll()
+    } catch (error) {
+      console.log('Failed to customize boundary box')
+    }
+  }
