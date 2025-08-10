@@ -31,9 +31,9 @@ export const useEditorStore = create((set, get) => ({
      isModified: false,
      
     markAsModified: () => {
-      const designId = get().id
+      const id = get().id
       
-      if(designId) {
+      if(id) {
          set({
             lastModified: Date.now(),
             saveStatus: 'Saving...',
@@ -48,15 +48,16 @@ export const useEditorStore = create((set, get) => ({
     },
 
     saveToSever: async () => {
-       const designId = get().id
+       const id = get().id
        const canvas = get().canvas
 
-       if(!designId || !canvas) {
-          console.log('No design available or canvas available')
+       if(!id || !canvas) {
+          console.log('No design ID or canvas available')
+           return null
        }
 
        try {
-          const saveDesign = await saveCanvasState(canvas, designId, get().name)
+          const saveDesign = await saveCanvasState(canvas, id, get().name)
 
           set({
             saveStatus: 'Saved',
@@ -64,13 +65,17 @@ export const useEditorStore = create((set, get) => ({
           })
 
           return saveDesign
+
        } catch (error) {
-         
+          set({saveStatus: 'Error'})
+          return null
        }
     },
+
     debouncedSaveToServer: debounce(() => {
           get().saveToSever()
     }, 500),
+
      resetStore: () => {
         set({
          name: 'Untitled Design',

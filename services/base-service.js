@@ -6,11 +6,12 @@ const API_URL = process.env.API_URL || 'http://localhost:4000'
 export async function fetchWithAuth(endpoint, options = {}) {
      const session = await getSession()
 
-     if(!session) {
-        throw new Error('Not authenticated') 
-     }
+   //   if(!session) {
+   //      throw new Error('Not authenticated') 
+   //   }
 
      try {
+
         const response = await axios({
             url: `${API_URL}${endpoint}`,
             method: options.method || 'GET',
@@ -23,6 +24,7 @@ export async function fetchWithAuth(endpoint, options = {}) {
         })
 
         return response?.data
+        
      } catch (error) {
         throw new Error('Api request failed') 
      }

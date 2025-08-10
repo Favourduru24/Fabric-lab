@@ -1,4 +1,4 @@
-import { auth } from "./libs/auth";
+import { auth } from "./provider/auth";
 
 export default auth((req) => {
     const isLoginPage = req.nextUrl.pathname.startsWith('/login')

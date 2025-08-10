@@ -190,13 +190,13 @@ const Property = () => {
 
   const handleBringToFront = () => {
     if (!canvas || !selectedObj) return
-    canvas.bringToFront(selectedObj)
+    canvas.bringObjectToFront(selectedObj)
     canvas.requestRenderAll()
   }
 
   const handleSendToBack = () => {
     if (!canvas || !selectedObj) return
-    canvas.sendToBack(selectedObj)
+    canvas.sendObjectToBack(selectedObj)
     canvas.requestRenderAll()
   }
 

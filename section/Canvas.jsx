@@ -76,8 +76,7 @@ const Canvas = () => {
            //setup evennt listenners
 
             const handleCanvasChange = () => {
-              //  markAsModified()
-              console.log('Canvas Object Change || path change')
+               markAsModified()
             }
 
            fabricCanvas.on('object:added', handleCanvasChange)

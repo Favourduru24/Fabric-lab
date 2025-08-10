@@ -8,14 +8,14 @@ export async function uploadFileWithAuth(file, mediaData = {}) {
 
      const session = await getSession()
 
-     if(!session) {
-        throw new Error('Not authenticated') 
-     }
+   //   if(!session) {
+   //      throw new Error('Not authenticated') 
+   //   }
 
     const formData = new FormData()
     formData.append('file', file)
 
-    Object.entries(metaData).forEach(({key, value}) => {
+    Object.entries(mediaData).forEach(({key, value}) => {
        formData.append(key, value)
     })
 

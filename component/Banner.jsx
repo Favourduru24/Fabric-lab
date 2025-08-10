@@ -1,6 +1,6 @@
 'use client'
 import { saveDesign } from '@/services/design-service'
-import { Crown } from 'lucide-react'
+import { Crown, Loader2 } from 'lucide-react'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
@@ -32,7 +32,9 @@ const Banner = () => {
         }
 
     } catch (error) {
-       console.log(error, '')
+       console.error(error, 'Something went wrong creating canvas file.')
+    } finally{
+       setLoading(false)
     }
   }
 
@@ -46,9 +48,13 @@ const Banner = () => {
       </div>
       <h2 className='text-sm text-base md:text-lg font-bold mb-4 sm:mb-6 max-w-2xl mx-auto'>Design eye-caching thumbnails that get more views</h2>
       <button className='text-[#8b3dff] bg-white hover:bg-gray-100 rounded-lg px-4 py-2 sm:px-6 sm:py-2.5 font-semibold cursor-pointer '
-      //  onClick={}
+       onClick={handleCreateNewDesign}
        >
-         Start Designing
+        {loading ? (
+          <Loader2 className='w-5 h-5 animate-spin'/>
+        ): (
+         'Start Designing'
+        )}
       </button>
     </div>
   )

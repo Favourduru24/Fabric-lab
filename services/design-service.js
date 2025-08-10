@@ -1,4 +1,5 @@
 import { fetchWithAuth } from "./base-service";
+import { getSession } from "next-auth/react"
 
 export const getUserDesign = () => {
     return fetchWithAuth('/v1/designs')
@@ -9,7 +10,7 @@ export const getUserDesignById = (id) => {
 }
 
 export const saveDesign = (designData, id) => {
-    return fetchWithAuth("/v1/designs", {
+    return fetchWithAuth("/v1/designs/save-design", {
         method: 'POST',
         body: {
             ...designData,
@@ -25,16 +26,22 @@ export const deleteDesign = (id) => {
 }
 
 export async function saveCanvasState(canvas, designId = null, title = "Untitled Design") {
+      const session = await getSession()
+
+     if(!session) {
+        throw new Error('Not authenticated') 
+     }
+
     if(!canvas) return false
 
     try {
-        const canvasData = canvas.toJSON("id", 'filters')
+        const canvasData = canvas.toJSON(["id", 'filters'])
 
         const designData = {
-             name: 'title',
+             name: title,
             canvasData: JSON.stringify(canvasData),
             width: canvas.width,
-             height: canvas.height
+            height: canvas.height
         }
 
         return saveDesign(designData, designId)
