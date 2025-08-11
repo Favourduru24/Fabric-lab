@@ -12,7 +12,7 @@ const LoginCard = () => {
            <h3 className='text-2xl font-bold text-gray-800'>Jump back in!</h3>
            <p className='mt-3 text-gray-500 text-lg '>Sign in to continue to Fabric-lab</p>
          </div>
-            <button className={`w-full flex justify-center items-center gap-3 py-4 text-gray-700 border-[2px] border-gray-300 hover:border-[#8b3dff] hover:text-[#8b3dff] transition-all duration-300 group transform hover:scale-[1.01] active:scale-[0.99] cursor-pointer rounded-lg hover:bg-gray-50/20`} onClick={() => signIn('google', {callbakUrl: '/'})}>
+            <button className={`w-full flex justify-center items-center gap-3 py-4 text-gray-700 border-[2px] border-gray-300 hover:border-[#8b3dff] hover:text-[#8b3dff] transition-all duration-300 group transform hover:scale-[1.01] active:scale-[0.99] cursor-pointer rounded-lg hover:bg-gray-50/20`} onClick={() => signIn('google', {callbackUrl: '/'})}>
               <div className='rounded-full p-1 flex items-center justify-center group-hover:text-[#8b3dff] transition-color duration-300 gap-2'>
                 <LogIn className='w-5 group-hover:text-[#8b3dff] transition-colors duration-300 h-5 hover:text-[#8b3dff]'/>
                 <span className='font-semibold '>Continue with Google</span>

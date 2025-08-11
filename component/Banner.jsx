@@ -1,8 +1,9 @@
 'use client'
 import { saveDesign } from '@/services/design-service'
 import { Crown, Loader2 } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { getUserSubscription } from '@/services/subscription-service'
 
 const Banner = () => {
 
@@ -37,6 +38,16 @@ const Banner = () => {
        setLoading(false)
     }
   }
+
+  const fetchUserSubscription = async () => {
+     const response = await getUserSubscription()
+
+      console.log(response, 'fetchUserSubscription')
+  }
+
+  // useEffect(() => {
+  //   //  fetchUserSubscription()
+  // },[])
 
   return (
     <div

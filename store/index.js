@@ -76,6 +76,9 @@ export const useEditorStore = create((set, get) => ({
           get().saveToSever()
     }, 500),
 
+    userSubscription: null,
+    setUserSubscription: (data) => set({userSubscription: data}),
+
      resetStore: () => {
         set({
          name: 'Untitled Design',

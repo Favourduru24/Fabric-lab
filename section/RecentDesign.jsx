@@ -24,14 +24,15 @@ const RecentDesign = () => {
          title: `Design ${i}`,
          thumbnail: ''
       }))
+      
   return (
     <div className=''>
       <h2 className='text-xl font-bold mb-4 text-gray-500'>Recent Designs</h2>
       <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4'>
         {design.map((des, index) => (
            <Link href={`/editor/${des.id}`} key={index}> 
-             <div className='group cursor-pointer'  >
-            <div className='aspect-video bg-gray-100 rounded-lg mb-2 overflow-hidden transition-shadow group-hover:shadow-md'>
+             <div className='group cursor-pointer'>
+            <div className='w-[300px] h-[300px] rounded-lg mb-2 overflow-hidden transition-shadow group-hover:shadow-md p-2'>
               <p className='font-bold text-sm truncate'>{des.title}</p>
             </div>
              </div>
