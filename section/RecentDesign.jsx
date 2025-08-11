@@ -12,10 +12,10 @@ const RecentDesign = () => {
 
        async function fetchUserDesign() {
              const result = await getUserDesign()
-             console.log(result) 
+             console.log({result}) 
           }
 
-      useEffect(() => {
+       useEffect(() => {
           fetchUserDesign()
       },[])
 

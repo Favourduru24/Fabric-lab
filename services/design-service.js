@@ -2,22 +2,22 @@ import { fetchWithAuth } from "./base-service";
 import { getSession } from "next-auth/react"
 
 export const getUserDesign = () => {
-    return fetchWithAuth('/v1/designs')
+    return fetchWithAuth('/v1/design/get-user-design')
 }
 
 export const getUserDesignById = (id) => {
-    return fetchWithAuth(`/v1/designs${id}`)
+    return fetchWithAuth(`/v1/design${id}`)
 }
 
-export const saveDesign = (designData, id) => {
-    return fetchWithAuth("/v1/designs/save-design", {
+export const saveDesign = (designData, id=null) => {
+    return fetchWithAuth("/v1/design/save-design", {
         method: 'POST',
-        body: {
+        body: {  // Use `data` instead of `body`
             ...designData,
-            id
-        }
-    })
-}
+            id,
+        },
+    });
+};
 
 export const deleteDesign = (id) => {
     return fetchWithAuth(`/v1/designs${id}`, {

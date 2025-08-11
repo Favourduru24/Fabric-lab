@@ -12,6 +12,7 @@ const Banner = () => {
 
   const handleCreateNewDesign = async () => {
     if(loading) return 
+
     try {
        setLoading(true)
         
@@ -27,9 +28,11 @@ const Banner = () => {
 
          console.log(newDesign)
 
-        if(newDesign?.success) {
+        if(newDesign && newDesign?.success) {
            router.push(`/editor/${newDesign?.data?.id}`)
            setLoading(false)
+        } else {
+           throw new Error('Failed to create new design.')
         }
 
     } catch (error) {
@@ -39,11 +42,11 @@ const Banner = () => {
     }
   }
 
-  const fetchUserSubscription = async () => {
-     const response = await getUserSubscription()
+//   const fetchUserSubscription = async () => {
+//      const response = await getUserSubscription()
 
-      console.log(response, 'fetchUserSubscription')
-  }
+//       console.log(response, 'fetchUserSubscription')
+//   }
 
   // useEffect(() => {
   //   //  fetchUserSubscription()

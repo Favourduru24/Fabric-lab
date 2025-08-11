@@ -15,30 +15,30 @@ function UploadPanel  (){
    const fileRef = useRef()
 
 
-  //  const {data: session, status} = useSession()
+   const {data: session, status} = useSession()
 
-  //  const fetchUserUploads = useCallback(async () => {
-  //      if(status === 'authenticated' || !session?.idToken) return
-  //      try {
-  //        setIsLoading(true)
+   const fetchUserUploads = useCallback(async () => {
+       if(status === 'authenticated' || !session?.idToken) return
+       try {
+         setIsLoading(true)
 
-  //        const data = await fetchWithAuth('/v1/media/get-asset')
+         const data = await fetchWithAuth('/v1/media/get-asset')
 
-  //         // console.log(data)
+          // console.log(data)
 
-    // setUserUploads(data?.data)
+    setUserUploads(data?.data)
 
-  //      } catch(e) {
-  //        console.log(e)
-  //      } finally{
-  //       setIsLoading(false)
-  //      }
-  //  }, [status, session?.idToken])
+       } catch(e) {
+         console.log(e)
+       } finally{
+        setIsLoading(false)
+       }
+   }, [status, session?.idToken])
 
-  //  useEffect(() => {
-  //   if(status === 'authenticated')   fetchUserUploads()
+   useEffect(() => {
+    if(status === 'authenticated')   fetchUserUploads()
 
-  //  }, [status, fetchUserUploads])
+   }, [status, fetchUserUploads])
 
 
   const handleFileUpload = async (e) => {
