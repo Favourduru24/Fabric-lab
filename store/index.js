@@ -79,6 +79,9 @@ export const useEditorStore = create((set, get) => ({
     userSubscription: null,
     setUserSubscription: (data) => set({userSubscription: data}),
 
+    userDesign: [],
+    setUserDesign: (data) => set({userDesign: data}),
+
      resetStore: () => {
         set({
          name: 'Untitled Design',

@@ -1,16 +1,18 @@
 'use client'
 import { saveDesign } from '@/services/design-service'
 import { Crown, Loader2 } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import {useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { getUserSubscription } from '@/services/subscription-service'
+import { useEditorStore } from '@/store'
 
 const Banner = () => {
 
    const [loading, setLoading] = useState(false)
    const router = useRouter()
+   const {userSubscription, userDesign} = useEditorStore()
 
   const handleCreateNewDesign = async () => {
+     if(userDesign.length >= 5 )
     if(loading) return 
 
     try {
@@ -26,8 +28,6 @@ const Banner = () => {
 
         const newDesign = await saveDesign(initialDesignData)
 
-         console.log(newDesign)
-
         if(newDesign && newDesign?.success) {
            router.push(`/editor/${newDesign?.data?._id}`)
            setLoading(false)
@@ -42,15 +42,7 @@ const Banner = () => {
     }
   }
 
-//   const fetchUserSubscription = async () => {
-//      const response = await getUserSubscription()
-
-//       console.log(response, 'fetchUserSubscription')
-//   }
-
-  // useEffect(() => {
-  //   //  fetchUserSubscription()
-  // },[])
+ 
 
   return (
     <div

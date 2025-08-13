@@ -3,14 +3,14 @@ import DropDown from './DropDown'
 import { useEffect, useState } from 'react'
 import { dropmenu } from '@/constant'
 import { useEditorStore } from '@/store'
-import { Download, Save, Search, Star } from 'lucide-react'
+import { Download, Loader, Save, Search, Star } from 'lucide-react'
 import ExportModel from '@/section/ExportModel'
 
 const EditorHeader = () => {
     
      const [select, setSelect] = useState('')
      const [show, setShow] = useState(false)
-     const {isEditing, setIsEditing, name, setName, canvas} = useEditorStore()
+     const {isEditing, markAsModified, name, setName, canvas, id, saveStatus} = useEditorStore()
 
      useEffect(() => {
          if(!canvas) return
@@ -20,6 +20,12 @@ const EditorHeader = () => {
             obj.evented = isEditing
           })
      }, [isEditing])
+
+     useEffect(() => {
+       if(!canvas || !id) return
+        
+          markAsModified()
+     }, [name, canvas, id])
 
      const handleToggleModal = () => {
        setShow((prev) => !prev)
@@ -31,8 +37,15 @@ const EditorHeader = () => {
             <DropDown options={dropmenu} value={select} onChange={(value) => setSelect(value)} placeholder={isEditing ? 'Editing' : 'Viewing'} 
               /> 
 
-              <button className='relative '>
+              <button className='relative'>
+                {
+                  saveStatus === 'Saving' ? 
+                  (
+            <Loader className='w-5 h-5 animate-spin'/>
+                  ) : (
            <Save className='w-6 h-6 cursor-pointer'/>
+                  )
+                }
         </button> 
               <button className='relative' onClick={() => setShow(true)}>
            <Download className='w-6 h-6 cursor-pointer' onClick={handleToggleModal}/>

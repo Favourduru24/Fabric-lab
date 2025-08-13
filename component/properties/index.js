@@ -8,7 +8,7 @@ import CustomDropdown from "../CustomDropDown"
 import { borderStyles, fontFamilies, imageFilter } from "@/constant"
 
 const Property = () => {
-  const { canvas } = useEditorStore()
+  const { canvas, markAsModified} = useEditorStore()
   
   const [selectedObj, setSelectedObj] = useState(null)
   const [objectType, setObjectType] = useState('')
@@ -51,6 +51,7 @@ const Property = () => {
     
     selectedObj.set(property, value)
     canvas.requestRenderAll()
+    markAsModified()
   }, [canvas, selectedObj])
 
   const handleSelectionCreated = useCallback(() => {
@@ -181,23 +182,27 @@ const Property = () => {
   const handleDuplicate = async () => {
     if (!canvas || !selectedObj) return
     await cloneSelectedCanvas(canvas)
+    markAsModified()
   }
 
   const handleDelete = () => {
     if (!canvas || !selectedObj) return
     deleteSelectedCanvas(canvas)
+    markAsModified()
   }
 
   const handleBringToFront = () => {
     if (!canvas || !selectedObj) return
     canvas.bringObjectToFront(selectedObj)
     canvas.requestRenderAll()
+    markAsModified()
   }
 
   const handleSendToBack = () => {
     if (!canvas || !selectedObj) return
     canvas.sendObjectToBack(selectedObj)
     canvas.requestRenderAll()
+    markAsModified()
   }
 
   const handleFlipHorizontal = () => {
@@ -330,6 +335,7 @@ const Property = () => {
       
       imgObj.applyFilters()
       canvas.requestRenderAll()
+      markAsModified()
     } catch (e) {
       console.error('Failed to apply filters', e)
     }

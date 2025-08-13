@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import {useEditorStore} from '../../store/index'
 import { useSession } from 'next-auth/react'
 import {fetchWithAuth } from '@/services/base-service'
-import { Upload, Loader2 } from 'lucide-react'
+import { Upload, Loader, Search } from 'lucide-react'
 import { uploadFileWithAuth } from '@/services/upload-service'
 import { addImageToCanvas } from '@/fabric/fabric-utils'
 
@@ -11,6 +11,7 @@ function UploadPanel  (){
 
    const {canvas} = useEditorStore()
    const [isLoading, setIsLoading] = useState(false)
+   const [isUploading, setIsUploading] = useState(false)
    const [userUploads, setUserUploads] = useState([])
    const fileRef = useRef()
 
@@ -45,7 +46,7 @@ function UploadPanel  (){
       
     const files = e.target.files[0]
 
-    setIsLoading(true)
+    setIsUploading(true)
 
       try {
 
@@ -56,7 +57,7 @@ function UploadPanel  (){
       } catch (error) {
         console.log(error, 'Error uploading image')
       } finally {
-        setIsLoading(false)
+        setIsUploading(false)
         e.target.value = ''
       }
   }
@@ -64,21 +65,6 @@ function UploadPanel  (){
  const handleClick = () => {
     fileRef.current.click()  
  }
-
-const images = [
-  {
-   url: '/img1.png',
-   name: 'img1 png'
-},
-  {
-   url: '/img1.png',
-   name: 'img1 png'
-},
-  {
-   url: '/img1.png',
-   name: 'img1 png'
-},
-]
 
 const handleAddImage = (imageUrl) => {
     if(!canvas) return
@@ -97,9 +83,9 @@ const handleAddImage = (imageUrl) => {
                   ref={fileRef} 
                   accept='image/*'
                    onChange={handleFileUpload}
-                   disabled={isLoading}/>
+                   disabled={isUploading}/>
                    <Upload className='w-5 h-5'/>
-                   <span className=''>{isLoading ? 'Uploading...' : 'Upload Files'}</span>
+                   <span className=''>{isUploading ? 'Uploading...' : 'Upload Files'}</span>
                  </button>
               </div>
               <div className="mt-4">
@@ -107,9 +93,9 @@ const handleAddImage = (imageUrl) => {
         {
           isLoading 
            ? 
-           <div className="border p-6 flex rounded-md items-center justify-center gap-2">
-             <Loader2 className="w-4 h-4 animate-spin"/>
-               <p>Loading your uploads...</p>
+           <div className="border p-6 flex rounded-md items-center justify-center gap-2 shadow-sm">
+             <Loader className="w-5 h-5 text-gray-500 animate-spin"/>
+               <p className='text-gray-500 text-sm font-semibold'>Loading your uploads...</p>
            </div> 
            : 
              
@@ -133,7 +119,11 @@ const handleAddImage = (imageUrl) => {
                ))} 
                     </div>
                    )
-                  : <p className="text-sm text-gray-500 mt-2 font-semibold">No image found!</p>}
+                  : (
+                <div className="border p-6 flex rounded-md items-center justify-center gap-2 shadow-sm">
+             <Search className="w-5 h-5 text-gray-500"/>
+               <p className='text-gray-500 text-sm font-semibold'>No Upload found</p>
+           </div> )}
                  </>
            
 

@@ -1,5 +1,4 @@
  'use client'
-
  import React, { useEffect, useRef, useState } from 'react'
  
  const DesignCard = ({design}) => {
@@ -7,21 +6,31 @@
      const fabricCanvasRef = useRef(null)
 
        useEffect(() => {
-          if(!design.canvasData) return
+          if(!design?.canvasData) return
            
-          const timer = setTimeout(async () => {
-             if(fabricCanvasRef.current && typeof fabricCanvasRef.current.dispose() === 'function') {
+           const timer = setTimeout(async () => {
+
                 try {
+
+                 if(fabricCanvasRef.current && typeof fabricCanvasRef.current.dispose() === 'function') {
+
+                try {
+                       
                     fabricCanvasRef.current.dispose() 
                     fabricCanvasRef.current = null
 
-                   const fabric = await import('fabric')
+                  } catch (error) {
+                  console.error('Error while disposing canvas', error)    
+                }
+               }
 
-             const canvasElement = document.getElementById(canvasId)
+              const fabric = await import('fabric')
 
-             if(!canvasElement) return 
+              const canvasElement = document.getElementById(canvasId)
 
-             const designPreview = new fabric.StaticCanvas({
+              if(!canvasElement) return 
+
+             const designPreview = new fabric.StaticCanvas(canvasId, {
                 width: 300,
                 height: 300,
                 renderOnAddRemove: true
@@ -32,6 +41,7 @@
               let canvasData 
 
                  try {
+
                  canvasData = typeof design.canvasData === 'string' ?
                   JSON.parse(design.canvasData) : design.canvasData 
                  } catch (innerError) {
@@ -49,9 +59,9 @@
                  })
 
                 } catch (error) {
-                  console.error('Error while drendering design preview canvas', error)    
+                  console.log('Error')
                 }
-             }
+                
           }, 100)
 
           return () =>{
@@ -66,7 +76,7 @@
           }
         }
 
-       }, [design?._id]) 
+       }, [design?._id, canvasId]) 
 
    return (
       <canvas

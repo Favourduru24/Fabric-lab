@@ -12,7 +12,7 @@ export const getUserDesignById = (id) => {
 export const saveDesign = (designData, id=null) => {
     return fetchWithAuth("/v1/design/save-design", {
         method: 'POST',
-        data: {  // Use `data` instead of `body`
+        data: {  
             ...designData,
             id,
         },

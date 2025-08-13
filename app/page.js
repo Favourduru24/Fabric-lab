@@ -1,11 +1,38 @@
- import AiFeaures from '@/component/AiFeaures'
+'use client'
+import AiFeaures from '@/component/AiFeaures'
 import Banner from '@/component/Banner'
 import DesignType from '@/component/DesignType'
 import Header from '@/component/Header'
 import Sidebar from '@/component/Sidebar'
 import RecentDesign from '@/section/RecentDesign'
+import { getUserSubscription } from '@/services/subscription-service'
+import { useEditorStore } from '@/store'
+import { useEffect } from 'react'
  
  const Home = () => {
+
+  const {setUserSubscription, setUserDesign} = useEditorStore()
+
+   const fetchUserSubscription = async () => {
+     const response = await getUserSubscription()
+
+      if(response?.success) setUserSubscription(response.data)
+
+  }
+
+   async function fetchUserDesign() {
+             const result = await getUserDesign()
+             console.log({result}) 
+             setUserDesign(result?.data)
+
+          }
+
+  useEffect(() => {
+     fetchUserSubscription()
+     fetchUserDesign()
+  },[])
+
+    
    return (
      <div className='flex min-h-screen bg-white'>
         <Sidebar/>

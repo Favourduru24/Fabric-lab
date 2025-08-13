@@ -8,7 +8,7 @@ import { useState } from "react"
 
 function SettingPanel  () {
 
-   const {canvas} = useEditorStore()
+   const {canvas, markAsModified} = useEditorStore()
    
    const [backgroundColor, setBackgroundColor] = useState('#ffffff')
 
@@ -26,6 +26,7 @@ function SettingPanel  () {
           canvas.renderAll()
 
          centerCanvas(canvas)
+         markAsModified()
    }
    
   return (
