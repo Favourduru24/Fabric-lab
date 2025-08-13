@@ -18,15 +18,15 @@ function UploadPanel  (){
    const {data: session, status} = useSession()
 
    const fetchUserUploads = useCallback(async () => {
-       if(status === 'authenticated' || !session?.idToken) return
+       if(status === 'authenticated' && !session?.idToken) return
        try {
          setIsLoading(true)
 
-         const data = await fetchWithAuth('/v1/media/get-asset')
+         const userImages = await fetchWithAuth('/v1/media/get-asset')
 
-          // console.log(data)
+          console.log({userImages})
 
-    setUserUploads(data?.data)
+         setUserUploads(userImages?.data)
 
        } catch(e) {
          console.log(e)
@@ -107,18 +107,18 @@ const handleAddImage = (imageUrl) => {
         {
           isLoading 
            ? 
-           <div className="border p-6 flex rounded-md items-center justify-center">
-             <Loader2 className="w-4 h-4 "/>
+           <div className="border p-6 flex rounded-md items-center justify-center gap-2">
+             <Loader2 className="w-4 h-4 animate-spin"/>
                <p>Loading your uploads...</p>
            </div> 
            : 
              
                  <>
                 
-                  {images.length > 0 ?
+                  {userUploads.length > 0 ?
                    (
                     <div className="grid grid-cols-3 gap-3">
-                      {images.map((img, index) => (
+                      {userUploads.map((img, index) => (
                     <div
                     className="aspect-auto bg-gray-50 rounded-md overflow-hidden hover:opacity-85 transition-opacity relative group cursor-pointer"
                   key={index}
