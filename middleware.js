@@ -15,15 +15,15 @@ export default auth((req) => {
          return null
       }
 
-    //   if(!isAuthUser) {
-    //      return Response.redirect(new URL('/login', req.url))
-    //   }
+      if(!isAuthUser) {
+         return Response.redirect(new URL('/login', req.url))
+      }
 })
 
  export const config = {
     matcher: [
         '/',
         '/editor/:path*',
-      //   '/login'
+        '/login'
     ]
  }

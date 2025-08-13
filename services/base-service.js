@@ -14,10 +14,10 @@ export async function fetchWithAuth(endpoint, options = {}) {
         const response = await axios({
             url: `${API_URL}${endpoint}`,
             method: options.method || 'GET',
-            // headers: {
-            //     Authorization: `Bearer ${session.accessToken || session.idToken}`, // Check your NextAuth token key
-            //     ...options.headers,
-            // },
+            headers: {
+                Authorization: `Bearer ${session.accessToken || session.idToken}`, // Check your NextAuth token key
+                ...options.headers,
+            },
             data: options.body || options.data, // Use `data` instead of `body` for Axios
             params: options.params,
         });

@@ -29,7 +29,7 @@ const Banner = () => {
          console.log(newDesign)
 
         if(newDesign && newDesign?.success) {
-           router.push(`/editor/${newDesign?.data?.id}`)
+           router.push(`/editor/${newDesign?.data?._id}`)
            setLoading(false)
         } else {
            throw new Error('Failed to create new design.')

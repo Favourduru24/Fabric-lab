@@ -75,22 +75,24 @@ const EditorDetails = () => {
           setLoading(true)
           setLoadAttempted(true)
 
-         //  const response = await getUserDesignById(id)
+          const response = await getUserDesignById(id)
+            
+   //        console.log({response})
 
-           const responses = {
-         data: {
-           category: 'youtube',
-            name: 'canvas',
-           updatedDate: '',
-           height: 465,
-           width: 825,
-           canvasData: null 
-         }
-   }
+   //         const responses = {
+   //       data: {
+   //         category: 'youtube',
+   //          name: 'canvas',
+   //         updatedDate: '',
+   //         height: 465,
+   //         width: 825,
+   //         canvasData: null 
+   //       }
+   // }
 
-          const design = responses?.data
+          const design = response?.data
 
-          console.log([design, responses])
+         //  console.log([design, responses])
 
           if(design) {
 

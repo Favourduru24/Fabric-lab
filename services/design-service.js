@@ -6,13 +6,13 @@ export const getUserDesign = () => {
 }
 
 export const getUserDesignById = (id) => {
-    return fetchWithAuth(`/v1/design${id}`)
+    return fetchWithAuth(`/v1/design/get-user-design/${id}`)
 }
 
 export const saveDesign = (designData, id=null) => {
     return fetchWithAuth("/v1/design/save-design", {
         method: 'POST',
-        body: {  // Use `data` instead of `body`
+        data: {  // Use `data` instead of `body`
             ...designData,
             id,
         },
