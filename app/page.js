@@ -8,6 +8,7 @@ import PremiumModel from '@/section/PremiumModel'
 import RecentDesign from '@/section/RecentDesign'
 import { getUserSubscription } from '@/services/subscription-service'
 import { useEditorStore } from '@/store'
+import {getUserDesign} from '@/services/design-service'
 import { useEffect } from 'react'
  
  const Home = () => {
