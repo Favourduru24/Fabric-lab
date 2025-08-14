@@ -4,6 +4,7 @@ import Banner from '@/component/Banner'
 import DesignType from '@/component/DesignType'
 import Header from '@/component/Header'
 import Sidebar from '@/component/Sidebar'
+import PremiumModel from '@/section/PremiumModel'
 import RecentDesign from '@/section/RecentDesign'
 import { getUserSubscription } from '@/services/subscription-service'
 import { useEditorStore } from '@/store'
@@ -11,7 +12,7 @@ import { useEffect } from 'react'
  
  const Home = () => {
 
-  const {setUserSubscription, setUserDesign} = useEditorStore()
+  const {setUserSubscription, setUserDesign, showPremiumModal} = useEditorStore()
 
    const fetchUserSubscription = async () => {
      const response = await getUserSubscription()
@@ -32,6 +33,10 @@ import { useEffect } from 'react'
      fetchUserDesign()
   },[])
 
+  const closeUpdradePlan = () => {
+       setPremiumModal(false)
+     }
+
     
    return (
      <div className='flex min-h-screen bg-white'>
@@ -45,6 +50,7 @@ import { useEffect } from 'react'
                 <RecentDesign/>
             </main>
          </div>
+        <PremiumModel isOpen={showPremiumModal} onChange={closeUpdradePlan}/>
      </div>
    )
  }

@@ -15,7 +15,6 @@ const ExportModel = ({isOpen, onChange, isClosed}) => {
     description: 'Best for web and social media'
   },)
 
- const [selectedFormat, setSelectedFormat] = useState('png')
  const [isExprting, setIsExporting] = useState(false)
 
  const exportFormat = [

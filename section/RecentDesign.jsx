@@ -3,7 +3,6 @@ import {getUserDesign, getUserDesignById} from '@/services/design-service'
 import Link from 'next/link'
 
 
-import { useEffect, useState } from "react"
 import DesignCard from './DesignCard'
 import { useEditorStore } from '@/store'
 
@@ -12,12 +11,6 @@ const RecentDesign = () => {
 
       const {userDesign} = useEditorStore()
 
-      const design = Array(6).fill(null).map((_, i) => ({
-         id: 1,
-         title: `Design ${i}`,
-         thumbnail: ''
-      }))
-      
   return (
     <div className=''>
       <h2 className='text-xl font-bold mb-4 text-gray-500'>Recent Designs</h2>

@@ -5,12 +5,26 @@ import { dropmenu } from '@/constant'
 import { useEditorStore } from '@/store'
 import { Download, Loader, Save, Search, Star } from 'lucide-react'
 import ExportModel from '@/section/ExportModel'
+import PremiumModel from '@/section/PremiumModel'
 
 const EditorHeader = () => {
     
      const [select, setSelect] = useState('')
      const [show, setShow] = useState(false)
-     const {isEditing, markAsModified, name, setName, canvas, id, saveStatus} = useEditorStore()
+     const [upgradeModal, setUpdradeModal] = useState(false)
+     const {
+      isEditing,
+      markAsModified,
+      name,
+      setName,
+      canvas,
+      id, 
+      saveStatus,
+      userDesign,
+      showPremiumModal,
+      setPremiumModal,
+      userSubscription
+    } = useEditorStore()
 
      useEffect(() => {
          if(!canvas) return
@@ -28,7 +42,23 @@ const EditorHeader = () => {
      }, [name, canvas, id])
 
      const handleToggleModal = () => {
-       setShow((prev) => !prev)
+       setShow((prev) => !prev) 
+     }
+
+     const closeUpdradePlan = () => {
+       setPremiumModal(false)
+     }
+
+     const handleExport = () => {
+      // userDesign.length >= 5 && !userSubscription.isPremium
+        if(!upgradeModal) {
+         console.log('Please upgrade to premium!')
+         setPremiumModal(true)
+        return
+     } else {
+      setShow(true) 
+     }
+
      }
 
   return (
@@ -47,8 +77,8 @@ const EditorHeader = () => {
                   )
                 }
         </button> 
-              <button className='relative' onClick={() => setShow(true)}>
-           <Download className='w-6 h-6 cursor-pointer' onClick={handleToggleModal}/>
+              <button className='relative'onClick={handleExport}>
+           <Download className='w-6 h-6 cursor-pointer' />
         </button> 
        </div>
         
@@ -69,6 +99,8 @@ const EditorHeader = () => {
               /> 
           </div>
           <ExportModel isOpen={show} onChange={handleToggleModal} isClosed={setShow}/>
+
+          <PremiumModel isOpen={showPremiumModal} onChange={closeUpdradePlan} isClosed={setUpdradeModal}/>
     </header>
   )
 }

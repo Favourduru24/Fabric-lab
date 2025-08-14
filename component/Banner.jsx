@@ -12,7 +12,11 @@ const Banner = () => {
    const {userSubscription, userDesign} = useEditorStore()
 
   const handleCreateNewDesign = async () => {
-     if(userDesign.length >= 5 )
+     if(userDesign.length >= 5 && !userSubscription.isPremium) {
+        console.log('Please upgrade to premium!')
+        return
+     }
+
     if(loading) return 
 
     try {

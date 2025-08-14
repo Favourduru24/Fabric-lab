@@ -4,12 +4,14 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { saveDesign } from '@/services/design-service'
+import { useEditorStore } from '@/store'
 
 
 const Sidebar = () => {
 
     const [loading, setLoading] = useState(false)
     const router = useRouter()
+    const {setPremiumModal} = useEditorStore()
     
       const handleCreateNewDesign = async () => {
         if(loading) return 
@@ -59,9 +61,10 @@ const Sidebar = () => {
                         icon: <CreditCard className="h-6 w-6"/>, label: 'Billing', active: false
                     },
                 ].map((menuItem, index) => (
-                     <div key={index} className="flex flex-col items-center w-full">
+                     <div key={index} className="flex flex-col items-center w-full" onClick={menuItem.label === 'Billing' ? () => setPremiumModal(true) : null }>
                          <Link href="#"
                           className="w-full flex flex-col items-center py-2 text-gray-600 hover:bg-gray-100 hover:text-purple-600"
+                          
                          >
                               <div className='relative'>
                                  {menuItem.icon}
