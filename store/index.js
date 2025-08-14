@@ -36,7 +36,7 @@ export const useEditorStore = create((set, get) => ({
       if(id) {
          set({
             lastModified: Date.now(),
-            saveStatus: 'Saving...',
+            saveStatus: 'Saving',
             isModified: true
          })
 
