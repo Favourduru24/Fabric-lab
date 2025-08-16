@@ -13,45 +13,56 @@ import {
     Pencil,
     EraserIcon,
     Paintbrush,
+    Home,
+    FolderOpen,
+    CreditCard,
 } from 'lucide-react'
 
 export const designTypes =[
     {
         icon: <Youtube className='h-6 w-6 text-white'/>,
         label: 'Youtube Thumbnail',
-        bgColor: 'bg-red-500'
+        bgColor: 'bg-red-500',
+        width: 900,
+        height: 500
         
     },
     {
         icon: <Image className='h-6 w-6 text-white'/>,
         label: 'Logo Design',
-        bgColor: 'bg-purple-500'
+        bgColor: 'bg-purple-500',
+        width: 400,
+        height: 465
         
     },
     {
         icon: <Palette className='h-6 w-6 text-white'/>,
         label: 'Color Palette',
-        bgColor: 'bg-blue-500'
-        
+        bgColor: 'bg-blue-500',
+        width: 500,
+        height: 500
     },
     
     {
         icon: <Type className='h-6 w-6 text-white'/>,
         label: 'Typography',
-        bgColor: 'bg-green-500'
-        
+        bgColor: 'bg-green-500',
+        width: 200,
+        height: 200       
     },
     {
         icon: <Heart className='h-6 w-6 text-white'/>,
         label: 'Social Media',
-        bgColor: 'bg-orange-500'
-        
+        bgColor: 'bg-orange-500',
+        width: 825,
+        height: 465,
     },
     {
         icon: <Sticker className='h-6 w-6 text-white'/>,
         label: 'Stikers',
-        bgColor: 'bg-pink-500'
-        
+        bgColor: 'bg-pink-500',
+         width: 250,
+        height: 250,
     },
     {
         icon: <Printer className='h-6 w-6 text-white'/>,
@@ -248,5 +259,33 @@ export const drawPanelColorPreset = [
     {
      value: "blur",
      label: "blur",
+    },
+ ]
+
+ export const Catalog = [
+    {
+        label: 'Your Design',
+        id: 1
+    },
+    {
+        label: 'Template',
+        id: 2
+    },
+    {
+        label: 'Fabric-lab AI',
+        id: 3
+    },
+     
+ ]
+
+ export const NavLinks = [
+    {
+        icon: <Home className="h-6 w-6"/>, label: 'Home', active: true
+        },
+    {
+        icon: <FolderOpen className="h-6 w-6"/>, label: 'Projects', active: false
+    },
+    {
+        icon: <CreditCard className="h-6 w-6"/>, label: 'Billing', active: false
     },
  ]

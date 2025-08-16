@@ -1,5 +1,5 @@
 'use client'
-import {getUserDesign, getUserDesignById} from '@/services/design-service'
+import {deleteDesign, getUserDesign, getUserDesignById} from '@/services/design-service'
 import Link from 'next/link'
 
 
@@ -10,6 +10,10 @@ import { useEditorStore } from '@/store'
 const RecentDesign = () => {
 
       const {userDesign} = useEditorStore()
+
+      const handleDeleteDesign = async (designId) => {
+        const response = await deleteDesign(designId)
+      }
 
   return (
     <div className=''>

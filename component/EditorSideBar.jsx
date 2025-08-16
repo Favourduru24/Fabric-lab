@@ -7,6 +7,7 @@ import DrawPanel from './panel/Draw'
 import SettingPanel from './panel/Setting'
 import AiPanel from './panel/Ai'
 import ElementPanel from './panel/Element'
+import Image from 'next/image'
 
 const EditorSideBar = () => {
     const [isPanelCollased, setIsPanelCollapsed] = useState(false)
@@ -72,14 +73,23 @@ const EditorSideBar = () => {
   return (
     <div className='flex h-full bg-gray-50'>
 
-       <aside className='w-[100px] flex rounded-[4px] transition-color text-white bg-transperent  border-none  flex-col w-full '>
-            
-         {sideBarItems.map((item) => (
-           <div key={item.id} className={`${activeSideBar === item.id ? 'bg-gray-100' : 'bg-transperent'} w-full flex items-center  flex-col justify-center hover:cursor-pointer hover:bg-gray-100 hover:text-purple-60 p-1 h-18 px-2`} onClick={() => handleItemClick(item.id)}>
+       <aside className='w-[100px] flex rounded-[4px] transition-color text-white bg-transperent  border-none  flex-col w-full h-full justify-between '>
+            <div>
+           {sideBarItems.map((item) => (
+           <div key={item.id} className={`${activeSideBar === item.id ? 'bg-gray-100' : 'bg-transperent'} w-full flex items-center flex-col justify-center hover:cursor-pointer hover:bg-gray-100 hover:text-purple-60 p-1 h-18 px-2 `} onClick={() => handleItemClick(item.id)}>
               <item.icon className='h-9 w-9 text-gray-500 justify-center flex'/>
               <span className='text-gray-400 text-xs mt-1 font-semibold'>{item.label}</span>
+             
            </div>
-         ))}   
+         ))} 
+            </div>
+           
+         
+           <div className='w-full justify-center flex items-center mb-20'>
+             <div className='w-10 h-10 rounded-full bg-black'>
+               <Image src="/vercel.svg" width={50} height={50} className='size-full rounded-full object-cover'/>
+             </div>    
+            </div>
       </aside>
 
        <div>

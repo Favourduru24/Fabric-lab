@@ -3,7 +3,7 @@ import DropDown from './DropDown'
 import { useEffect, useState } from 'react'
 import { dropmenu } from '@/constant'
 import { useEditorStore } from '@/store'
-import { Download, Loader, Save, Search, Star } from 'lucide-react'
+import { Download, Loader, Loader2, Save, Search, Share, Star } from 'lucide-react'
 import ExportModel from '@/section/ExportModel'
 import PremiumModel from '@/section/PremiumModel'
 
@@ -71,14 +71,11 @@ const EditorHeader = () => {
                 {
                   saveStatus === 'Saving' ? 
                   (
-            <Loader className='w-5 h-5 animate-spin'/>
+            <Loader2 className='w-8 h-8 animate-spin'/>
                   ) : (
-           <Save className='w-6 h-6 cursor-pointer'/>
+           <Save className='w-8 h-8 cursor-pointer'/>
                   )
                 }
-        </button> 
-              <button className='relative'onClick={handleExport}>
-           <Download className='w-6 h-6 cursor-pointer' />
         </button> 
        </div>
         
@@ -90,10 +87,18 @@ const EditorHeader = () => {
                    </div>
          </div>
           <div className='flex items-center space-x-3 w-fit whitespace-nowrap /'>
-             <button className='flex items-center bg-white/10 hover:bg-white/20 text-white rounded-md h-10 px-3 transition-color cursor-pointer w-full'>
+             <button className='flex items-center bg-white/10 hover:bg-white/20 text-white rounded-md h-10 px-3 transition-color cursor-pointer w-full font-semibold text-sm shadow-sm' onClick={!userSubscription?.isPremium ? () => setPremiumModal(true) : null}>
              <Star className="h-4 w-4 mr-1 text-yellow-400 "/>
-               <span>Upgrade your plan</span>
+               <span>{userSubscription?.isPremium ? 'Premium Member' : 'Upgrade your plan'}</span>
              </button>
+             <button className='flex items-center gap-2 px-4 py-2 rounded-md shadow-sm focus:ring-[#9E4B9E] h-10 w-full outline-none cursor-pointer gap-3 bg-white/10 hover:bg-white/20' onClick={handleExport}>
+                <Download className='w-6 h-6 cursor-pointer text-white'/>
+              <p className='text-white font-semibold text-sm'>Download</p>
+              </button>
+             <div className='flex items-center gap-2 px-4 py-2 rounded-md shadow-sm focus:ring-[#9E4B9E] h-10 w-full outline-none cursor-pointer gap-3 bg-white/10 hover:bg-white/20'>
+               <Share className='w-5 h-5 text-white'/>
+              <p className='text-white font-semibold text-sm'>Share</p>
+              </div>
 
               <DropDown options={dropmenu} value={select} onChange={(value) => setSelect(value)} placeholder={isEditing ? 'Editing' : 'Viewing'} 
               /> 

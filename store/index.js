@@ -85,6 +85,12 @@ export const useEditorStore = create((set, get) => ({
     showPremiumModal: false,
     setPremiumModal: (flag) => set({showPremiumModal: flag}),
 
+    projectModal: false,
+    setProjectModal: (flag) => set({projectModal: flag}),
+
+    catalogClicked: [],
+    setCatalogClicked: (data) => set({catalogClicked: data}),
+
      resetStore: () => {
         set({
          name: 'Untitled Design',

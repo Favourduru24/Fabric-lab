@@ -1,7 +1,8 @@
  'use client'
- import React, { useEffect, useRef, useState } from 'react'
+ import  { useEffect, useRef, useState } from 'react'
  
  const DesignCard = ({design}) => {
+
      const {canvasId} = useState(`canvas-${design._id}-${Date.now()}`)
      const fabricCanvasRef = useRef(null)
 
@@ -12,7 +13,7 @@
 
                 try {
 
-                 if(fabricCanvasRef.current && typeof fabricCanvasRef.current.dispose() === 'function') {
+                 if(fabricCanvasRef.current && typeof fabricCanvasRef.current.dispose === 'function') {
 
                 try {
                        
@@ -59,7 +60,7 @@
                  })
 
                 } catch (error) {
-                  console.log('Error')
+                  console.log('Error rendering design preview data')
                 }
                 
           }, 100)

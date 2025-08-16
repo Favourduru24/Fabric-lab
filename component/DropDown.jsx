@@ -1,5 +1,6 @@
 'use client'
 import { useEditorStore } from '@/store'
+import { Eye, Pencil } from 'lucide-react'
 import { useState, useEffect, useRef } from 'react'
 
 const DropDown = ({ 
@@ -51,22 +52,16 @@ const DropDown = ({
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center justify-between px-4 py-2 text-left  rounded-md shadow-sm focus:ring-[#9E4B9E] h-10 w-full outline-none cursor-pointer"
+        className="flex items-center justify-between px-4 py-2 text-left  rounded-md shadow-sm focus:ring-[#9E4B9E] h-10 w-full outline-none cursor-pointer gap-3"
       >
+        {isEditing ? <Pencil className='w-5 h-5'/> : <Eye/>}
         <span className='text-white font-medium text-lg'>{value || placeholder}</span>
-        <svg
-          className={`w-5 h-5 ml-2 transition-transform ${isOpen ? 'rotate-180' : ''}`}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
+        
       </button>
 
       {/* Dropdown Options */}
       {isOpen && (
-        <div className={`${overflow ? '-top-0' : ''} absolute z-10 w-full mt-2 bg-[#ffffff] rounded-md shadow-lg flex items-center`}>
+        <div className={`${overflow ? '-top-0' : ''} absolute z-10 w-full mt-3 bg-[#ffffff] rounded-md shadow-lg flex items-center`}>
           <ul className="py-1 overflow-auto text-base  focus:outline-none flex flex-col">
              
             {options.map((option) => (
@@ -77,7 +72,7 @@ const DropDown = ({
                   value === option.value ? ' text-gray-400' : 'text-gray-400 font-semibold text-[1rem]'
                 }`}
               >
-                 <div className='flex gap-2 items-center' onClick={option.label === 'Viewing' ? handleIsViewing : handleIsEditing}>
+                 <div className='flex justify-between items-center gap-2' onClick={option.label === 'Viewing' ? handleIsViewing : handleIsEditing}>
                     <button>{option.icon}</button>
                 <p >{option.label}</p>
 

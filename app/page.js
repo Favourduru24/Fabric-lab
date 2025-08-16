@@ -9,11 +9,14 @@ import RecentDesign from '@/section/RecentDesign'
 import { getUserSubscription } from '@/services/subscription-service'
 import { useEditorStore } from '@/store'
 import {getUserDesign} from '@/services/design-service'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
+import ProjectModel from '@/section/ProjectModel'
  
  const Home = () => {
 
-  const {setUserSubscription, setUserDesign, showPremiumModal} = useEditorStore()
+  const {setUserSubscription, setUserDesign, showPremiumModal, setPremiumModal, projectModal, setProjectModal, userDesign} = useEditorStore()
+  const projectModelRef = useRef()
+  const premiumModelRef = useRef()
 
    const fetchUserSubscription = async () => {
      const response = await getUserSubscription()
@@ -29,16 +32,28 @@ import { useEffect } from 'react'
 
           }
 
+   
+
   useEffect(() => {
      fetchUserSubscription()
      fetchUserDesign()
-  },[])
+  },[userDesign])
 
-  const closeUpdradePlan = () => {
-       setPremiumModal(false)
-     }
+  useEffect(() => {
+    const closeUpdradePlan = (e) => {
+        if(premiumModelRef.current && !premiumModelRef.current.contains(e.target)){
+          setPremiumModal(false)
 
-    
+         } 
+
+         if(projectModelRef.current && !projectModelRef.current.contains(e.target)) {
+           setProjectModal(false)
+         }
+        }
+         document.addEventListener('mousedown', closeUpdradePlan)
+         return () => document.removeEventListener('mousedown', closeUpdradePlan)
+   }, [])
+
    return (
      <div className='flex min-h-screen bg-white'>
         <Sidebar/>
@@ -51,7 +66,8 @@ import { useEffect } from 'react'
                 <RecentDesign/>
             </main>
          </div>
-        <PremiumModel isOpen={showPremiumModal} onChange={closeUpdradePlan}/>
+        <PremiumModel isOpen={showPremiumModal}  premiumModelRef={premiumModelRef}/>
+        <ProjectModel isOpen={projectModal} projectModelRef={projectModelRef}/>
      </div>
    )
  }
