@@ -1,6 +1,10 @@
 import { fetchWithAuth } from "./base-service";
 import { getSession } from "next-auth/react"
 
+export const getAllDesign = () => {
+    return fetchWithAuth('/v1/design/get-all-design')
+}
+
 export const getUserDesign = () => {
     return fetchWithAuth('/v1/design/get-user-design')
 }

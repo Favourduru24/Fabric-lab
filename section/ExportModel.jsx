@@ -1,10 +1,10 @@
 'use client'
 import { exportAsJson, exportAsPdf, exportAsPng, exportAsSVG } from '@/services/export-service'
 import { useEditorStore } from '@/store'
-import { Download, File, FileIcon, FileImage, FileJson, Loader, Loader2, X} from 'lucide-react'
+import { Download, File, FileIcon, FileImage, FileJson, Loader2} from 'lucide-react'
 import { useState } from 'react'
 
-const ExportModel = ({isOpen, onChange, isClosed}) => {
+const ExportModel = ({isOpen, isClosed, downloadModelRef, onChange}) => {
 
   
  const {canvas} = useEditorStore()
@@ -97,8 +97,7 @@ const ExportModel = ({isOpen, onChange, isClosed}) => {
     {
       isOpen && (
         <div className='inset-0 fixed bg-black/50 flex items-center justify-center z-50'>
-          <div className='max-w-md w-full h-fit bg-white rounded-md shadow-sm shadow-white ring-3 relative '>
-             <X className='w-5 text-black h-5 border rounded-sm absolute top-0 right-0 cursor-pointer' onClick={onChange}/>
+          <div className='max-w-md w-full h-fit bg-white rounded-md shadow-sm shadow-white ring-3 relative ' ref={downloadModelRef}>
              <div className='flex flex-col p-2'>
              <h3 className='text-xl text-gray-600 fon-semibold'>Export Design</h3>
                 <div className='py-4'>

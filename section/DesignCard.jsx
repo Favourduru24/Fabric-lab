@@ -2,9 +2,10 @@
  import  { useEffect, useRef, useState } from 'react'
  
  const DesignCard = ({design}) => {
-
-     const {canvasId} = useState(`canvas-${design._id}-${Date.now()}`)
+      
+     const [canvasId] = useState(`canvas-${design._id}-${Date.now()}`)
      const fabricCanvasRef = useRef(null)
+
 
        useEffect(() => {
           if(!design?.canvasData) return

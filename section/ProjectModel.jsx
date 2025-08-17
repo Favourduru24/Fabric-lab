@@ -1,7 +1,7 @@
 import { useEditorStore } from "@/store"
 import { Sparkle, X } from "lucide-react"
 
-const ProjectModel = ({isOpen, onChange, userDesign, projectModelRef}) => {
+const ProjectModel = ({isOpen, userDesign, projectModelRef}) => {
 
   return (
           <>

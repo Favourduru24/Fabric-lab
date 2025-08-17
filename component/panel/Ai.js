@@ -1,6 +1,6 @@
 import { generateImageFromAi } from '@/services/upload-service'
 import { useEditorStore } from '@/store'
-import { Loader, Sparkle, Wand2 } from 'lucide-react'
+import { Loader, Sparkles, Wand2 } from 'lucide-react'
 import React, { useState } from 'react'
 
 function AiPanel (){
@@ -81,7 +81,7 @@ function AiPanel (){
             )
             : (
               <>
-              <Sparkle className='mr-2 w-5 h-5'/>
+              <Sparkles className='mr-2 w-6 h-6'/>
              <p>Generate Image</p>
               </>
             )

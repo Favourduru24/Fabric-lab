@@ -14,7 +14,7 @@ import ProjectModel from '@/section/ProjectModel'
  
  const Home = () => {
 
-  const {setUserSubscription, setUserDesign, showPremiumModal, setPremiumModal, projectModal, setProjectModal, userDesign} = useEditorStore()
+  const {setUserSubscription, setUserDesign, showPremiumModal, setPremiumModal, projectModal, setProjectModal, userDesign, setColorDisplay} = useEditorStore()
   const projectModelRef = useRef()
   const premiumModelRef = useRef()
 
@@ -27,7 +27,6 @@ import ProjectModel from '@/section/ProjectModel'
 
    async function fetchUserDesign() {
              const result = await getUserDesign()
-             console.log({result}) 
              setUserDesign(result?.data)
 
           }
@@ -37,17 +36,18 @@ import ProjectModel from '@/section/ProjectModel'
   useEffect(() => {
      fetchUserSubscription()
      fetchUserDesign()
-  },[userDesign])
+  },[])
 
   useEffect(() => {
     const closeUpdradePlan = (e) => {
         if(premiumModelRef.current && !premiumModelRef.current.contains(e.target)){
           setPremiumModal(false)
-
+           setColorDisplay(false)
          } 
 
          if(projectModelRef.current && !projectModelRef.current.contains(e.target)) {
            setProjectModal(false)
+           setColorDisplay(false)
          }
         }
          document.addEventListener('mousedown', closeUpdradePlan)

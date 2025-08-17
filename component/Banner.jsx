@@ -57,11 +57,11 @@ const Banner = () => {
           <span className='sm:ml-2 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium leading-tight'>Create Innovative Designs</span>
       </div>
       <h2 className='text-sm text-base md:text-lg font-bold mb-4 sm:mb-6 max-w-2xl mx-auto'>Design eye-caching thumbnails that get more views</h2>
-      <button className='text-[#8b3dff] bg-white hover:bg-gray-100 rounded-lg px-4 py-2 sm:px-6 sm:py-2.5 font-semibold cursor-pointer '
+      <button className='text-[#8b3dff] bg-white hover:bg-gray-50/50 hover:text-white rounded-lg w-42 h-11 font-semibold cursor-pointer shadow-sm'
        onClick={handleCreateNewDesign}
        >
         {loading ? (
-          <Loader2 className='w-5 h-5 animate-spin'/>
+          <Loader2 className='w-5 h-5 animate-spin mx-auto'/>
         ): (
          'Start Designing'
         )}

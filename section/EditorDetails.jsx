@@ -75,20 +75,20 @@ const EditorDetails = () => {
           setLoading(true)
           setLoadAttempted(true)
 
-          const response = await getUserDesignById(id)
+         //  const response = await getUserDesignById(id)
             
    //        console.log({response})
 
-   //         const response = {
-   //       data: {
-   //         category: 'youtube',
-   //          name: 'canvas',
-   //         updatedDate: '',
-   //         height: 465,
-   //         width: 825,
-   //         canvasData: null 
-   //       }
-   // }
+           const response = {
+         data: {
+           category: 'youtube',
+            name: 'canvas',
+           updatedDate: '',
+           height: 465,
+           width: 825,
+           canvasData: null 
+         }
+   }
 
           const design = response?.data
 
@@ -199,7 +199,7 @@ const EditorDetails = () => {
          <EditorSideBar/>
          }
          <div className="flex-1 flex flex-col overflow-hidden relative">
-         <main className="flex-1 overflow-hiddden bg-[#f0f0f0] flex items-center justify-center">
+         <main className="flex-1 overflow-hiddden bg-gray-50/50 flex items-center justify-center ">
             <Canvas  />
          </main>
          </div>
@@ -208,6 +208,7 @@ const EditorDetails = () => {
          showProperties && isEditing &&  <Property/>
         }
     </div>
+    //#f0f0f0
   )
 }
 

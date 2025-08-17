@@ -1,16 +1,20 @@
 'use client'
 import DropDown from './DropDown'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef} from 'react'
 import { dropmenu } from '@/constant'
 import { useEditorStore } from '@/store'
 import { Download, Loader, Loader2, Save, Search, Share, Star } from 'lucide-react'
 import ExportModel from '@/section/ExportModel'
 import PremiumModel from '@/section/PremiumModel'
+import Link from 'next/link'
 
 const EditorHeader = () => {
     
      const [select, setSelect] = useState('')
      const [show, setShow] = useState(false)
+     const downloadModelRef = useRef()
+     const premiumModelRef = useRef()
+
      const [upgradeModal, setUpdradeModal] = useState(false)
      const {
       isEditing,
@@ -41,17 +45,29 @@ const EditorHeader = () => {
           markAsModified()
      }, [name, canvas, id])
 
+      useEffect(() => {
+         const closeUpdradePlan = (e) => {
+             if(premiumModelRef.current && !premiumModelRef.current.contains(e.target)){
+               setPremiumModal(false)
+     
+              } 
+     
+              if(downloadModelRef.current && !downloadModelRef.current.contains(e.target)) {
+                setShow((prev) => !prev)
+              }
+             }
+              document.addEventListener('mousedown', closeUpdradePlan)
+              return () => document.removeEventListener('mousedown', closeUpdradePlan)
+        }, [])
+
      const handleToggleModal = () => {
        setShow((prev) => !prev) 
      }
 
-     const closeUpdradePlan = () => {
-       setPremiumModal(false)
-     }
 
      const handleExport = () => {
       // userDesign.length >= 5 && !userSubscription.isPremium
-        if(!upgradeModal) {
+        if(upgradeModal) {
          console.log('Please upgrade to premium!')
          setPremiumModal(true)
         return
@@ -64,6 +80,9 @@ const EditorHeader = () => {
   return (
     <header className='flex px-4 justify-between items-center bg-gradient-to-r from-[#00c4cc] via-[#8b3dff] to-[#5533ff] h-14 py-2'>
        <div className='flex items-center space-x-4 '>
+        <Link href='/'>
+           <p className='text-white font-semibold text-2xl italic whitespace-nowrap'>Fabric-lab</p>
+        </Link> 
             <DropDown options={dropmenu} value={select} onChange={(value) => setSelect(value)} placeholder={isEditing ? 'Editing' : 'Viewing'} 
               /> 
 
@@ -77,13 +96,15 @@ const EditorHeader = () => {
                   )
                 }
         </button> 
-       </div>
         
+       </div>
+       
+
          <div className='flex-1 flex justify-center max-w-md '>
           <div className="flex-1 max-w-2xl mx-auto relative items-cente h-10 ">
                      <Search className="absolute top-1/2 left-3 transform -translate-y-1/2 h-5 w-5 text-white "/>
                       <input 
-                      value={name} onChange={(e) => setName(e.target.value)} className="pl-10 focus:border-white  focus:border focus:ring-2 flex-grow outline-none w-full rounded-lg h-full placeholder:text-white border"/>
+                      value={name} onChange={(e) => setName(e.target.value)} className="pl-10 focus:border-white border-gray-100  focus:border focus:ring-2 flex-grow outline-none w-full rounded-lg h-full placeholder:text-white border text-white" placeholder="Untittled Design"/>
                    </div>
          </div>
           <div className='flex items-center space-x-3 w-fit whitespace-nowrap /'>
@@ -96,16 +117,18 @@ const EditorHeader = () => {
               <p className='text-white font-semibold text-sm'>Download</p>
               </button>
              <div className='flex items-center gap-2 px-4 py-2 rounded-md shadow-sm focus:ring-[#9E4B9E] h-10 w-full outline-none cursor-pointer gap-3 bg-white/10 hover:bg-white/20'>
-               <Share className='w-5 h-5 text-white'/>
+               <Share className='w-6 h-5 font-semibold text-white'/>
               <p className='text-white font-semibold text-sm'>Share</p>
               </div>
 
-              <DropDown options={dropmenu} value={select} onChange={(value) => setSelect(value)} placeholder={isEditing ? 'Editing' : 'Viewing'} 
-              /> 
+               <div className='flex items-center gap-2 px-4 py-2 rounded-md shadow-sm focus:ring-[#9E4B9E] h-10 w-fit outline-none cursor-pointer gap-3 bg-white/10 hover:bg-white/20'>
+               {/* <People className='w-6 h-5 font-semibold text-white'/> */}
+              <p className='text-white font-semibold text-sm'>Create a Team for your design</p>
+              </div>
           </div>
-          <ExportModel isOpen={show} onChange={handleToggleModal} isClosed={setShow}/>
+          <ExportModel isOpen={show} onChange={handleToggleModal} isClosed={setShow} downloadModelRef={downloadModelRef}/>
 
-          <PremiumModel isOpen={showPremiumModal} onChange={closeUpdradePlan} isClosed={setUpdradeModal}/>
+          <PremiumModel isOpen={showPremiumModal} isClosed={setUpdradeModal} premiumModelRef={premiumModelRef}/>
     </header>
   )
 }

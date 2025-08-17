@@ -71,13 +71,13 @@ const EditorSideBar = () => {
      }
 
   return (
-    <div className='flex h-full bg-gray-50'>
+    <div className='flex h-full bg-gray-50 '>
 
-       <aside className='w-[100px] flex rounded-[4px] transition-color text-white bg-transperent  border-none  flex-col w-full h-full justify-between '>
+       <aside className='w-[100px] flex rounded-[4px] transition-color text-white bg-transperent  border-none  flex-col w-full h-full justify-between'>
             <div>
            {sideBarItems.map((item) => (
            <div key={item.id} className={`${activeSideBar === item.id ? 'bg-gray-100' : 'bg-transperent'} w-full flex items-center flex-col justify-center hover:cursor-pointer hover:bg-gray-100 hover:text-purple-60 p-1 h-18 px-2 `} onClick={() => handleItemClick(item.id)}>
-              <item.icon className='h-9 w-9 text-gray-500 justify-center flex'/>
+              <item.icon className='h-9 w-9 text-gray-500 justify-center flex font-thin'/>
               <span className='text-gray-400 text-xs mt-1 font-semibold'>{item.label}</span>
              
            </div>
@@ -87,7 +87,7 @@ const EditorSideBar = () => {
          
            <div className='w-full justify-center flex items-center mb-20'>
              <div className='w-10 h-10 rounded-full bg-black'>
-               <Image src="/vercel.svg" width={50} height={50} className='size-full rounded-full object-cover'/>
+               <Image src="/vercel.svg" width={50} height={50} alt="user-img" className='size-full rounded-full object-cover'/>
              </div>    
             </div>
       </aside>
@@ -96,13 +96,13 @@ const EditorSideBar = () => {
          {
         activeSideBar && (
            <div className={`
-           ${isPanelCollased ? 'w-0  transform' : ''} h-full  bg-white relative transition-all duration-200 shadow-r-md shadow-white`}
+           ${isPanelCollased ? 'w-0  transform' : ''} h-full  bg-white relative transition-all duration-200 border-r shadow-r-sm`}
               style={{width: isPanelCollased ? '0' : '320px', opacity: isPanelCollased ? 0 : 1,
                 overflow: isPanelCollased ? 'hidden' : 'visible'
               }}
            >
-              <div className='h-18 flex items-center border-b-1 border-[#e6e6e6] gap-1'>
-                 <button className='cursor-pointer' onClick={closeSecondaryPanel}>
+              <div className='h-16 flex items-center border-b-1 border-[#e6e6e6] gap-1'>
+                 <button className='cursor-pointer p-1' onClick={closeSecondaryPanel}>
                     <ArrowLeft className='h-5 w-5 text-gray-500'/>
                  </button>
                  <span className='text-gray-500 font-semibold'>

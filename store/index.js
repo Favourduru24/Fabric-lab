@@ -88,6 +88,9 @@ export const useEditorStore = create((set, get) => ({
     projectModal: false,
     setProjectModal: (flag) => set({projectModal: flag}),
 
+    colorDisplay: false,
+    setColorDisplay: (flag) => set({colorDisplay: flag}),
+
     catalogClicked: [],
     setCatalogClicked: (data) => set({catalogClicked: data}),
 

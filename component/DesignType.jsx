@@ -7,9 +7,11 @@ import { useState } from 'react'
 
 const DesignType = () => {
   const [loading, setLoading] = useState(false)
+  const [icon, setIcon] = useState(false)
   const router = useRouter()
   const {userDesign, userSubscription} = useEditorStore()
   const [currentSelected, setCurrentSelected] = useState(-1)
+  const [currentIndex, setCurrentIndex] = useState(-1)
 
   const handleCreateNewDesign = async (getCurrentType, index) => {
          setCurrentSelected(index)
@@ -47,21 +49,31 @@ const DesignType = () => {
          setLoading(false)
       }
     }
+
+    const handleDisplayTrue = (index) => {
+      setCurrentIndex(index)
+      setIcon(true)
+    }
+
+    const handleDisplayFalse = (index) => {
+      setCurrentIndex(index)
+      setIcon(false)
+    }
   
   return (
     <div className='grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-4 mt-13 justify-center '>
       {designTypes.map((type, index) => (
-         <div className='flex flex-col items-center ' key={type.label}>
-            <div className={`${type.bgColor} w-14 h-14 rounded-full flex items-center justify-center mb-2 cursor-pointer`} onClick={() => handleCreateNewDesign(type, index)}>
+         <div className='flex flex-col items-center ' key={type.label} >
+            <div className={`${type.bgColor} w-14 h-14 rounded-full flex items-center justify-center mb-2 cursor-pointer shadow-sm  `} onClick={() => handleCreateNewDesign(type, index)} onMouseOver={() => handleDisplayTrue(index)} onMouseLeave={() => handleDisplayFalse(index)}>
                    
-                  {type.icon}
+                  {currentIndex === index && icon ? type.icons : type.icon }
             </div>
              {
 
              }
              <div className='flex gap-2 items-center'>
               {loading && currentSelected === index ? 
-               <div className='flex items-center'>
+               <div className='flex items-center' >
                <Loader2 className={`h-5 w-5 animate-spin text-whit text-gray-500`}/> 
                <span className='text-xs text-center text-gray-400'>{type.label}</span>
                </div>

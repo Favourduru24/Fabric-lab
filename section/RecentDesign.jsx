@@ -15,6 +15,8 @@ const RecentDesign = () => {
         const response = await deleteDesign(designId)
       }
 
+      
+
   return (
     <div className=''>
       <h2 className='text-xl font-bold mb-4 text-gray-500'>Recent Designs</h2>
@@ -24,7 +26,7 @@ const RecentDesign = () => {
              <div className='group cursor-pointer'>
             <div className='w-[300px] h-[300px] rounded-lg mb-2 overflow-hidden transition-shadow group-hover:shadow-md p-2'>
                   {
-                   design?.canvasData && <DesignCard design={design}/> 
+                   design.canvasData && <DesignCard design={design} key={design._id}/> 
                   }             
             </div>
              </div>

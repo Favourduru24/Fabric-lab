@@ -16,11 +16,25 @@ import {
     Home,
     FolderOpen,
     CreditCard,
+    Mail,
+    SparklesIcon,
+    Images,
+    TypeOutline,
+    HeartHandshake,
+    PrinterCheck,
+    Sparkles,
+    UploadCloud,
+    LucideWand2,
+    Video,
+    DramaIcon,
+    Shapes
 } from 'lucide-react'
+
 
 export const designTypes =[
     {
         icon: <Youtube className='h-6 w-6 text-white'/>,
+        icons: <Video className='h-6 w-6 text-white'/>,
         label: 'Youtube Thumbnail',
         bgColor: 'bg-red-500',
         width: 900,
@@ -29,6 +43,7 @@ export const designTypes =[
     },
     {
         icon: <Image className='h-6 w-6 text-white'/>,
+        icons: <Images className='h-6 w-6 text-white'/>,
         label: 'Logo Design',
         bgColor: 'bg-purple-500',
         width: 400,
@@ -37,6 +52,7 @@ export const designTypes =[
     },
     {
         icon: <Palette className='h-6 w-6 text-white'/>,
+        icons: <Shapes className='h-6 w-6 text-white'/>,
         label: 'Color Palette',
         bgColor: 'bg-blue-500',
         width: 500,
@@ -45,6 +61,7 @@ export const designTypes =[
     
     {
         icon: <Type className='h-6 w-6 text-white'/>,
+        icons: <TypeOutline className='h-6 w-6 text-white'/>,
         label: 'Typography',
         bgColor: 'bg-green-500',
         width: 200,
@@ -52,6 +69,7 @@ export const designTypes =[
     },
     {
         icon: <Heart className='h-6 w-6 text-white'/>,
+        icons: <HeartHandshake className='h-6 w-6 text-white'/>,
         label: 'Social Media',
         bgColor: 'bg-orange-500',
         width: 825,
@@ -59,6 +77,7 @@ export const designTypes =[
     },
     {
         icon: <Sticker className='h-6 w-6 text-white'/>,
+        icons: <DramaIcon className='h-6 w-6 text-white'/>,
         label: 'Stikers',
         bgColor: 'bg-pink-500',
          width: 250,
@@ -66,24 +85,28 @@ export const designTypes =[
     },
     {
         icon: <Printer className='h-6 w-6 text-white'/>,
+        icons: <PrinterCheck className='h-6 w-6 text-white'/>,
         label: 'Printer',
         bgColor: 'bg-purple-500'
         
     },
     {
         icon: <Sparkle className='h-6 w-6 text-white'/>,
+        icons: <Sparkles className='h-6 w-6 text-white'/>,
         label: 'Ai Background',
         bgColor: 'bg-blue-600'
         
     },
     {
         icon: <Wand2 className='h-6 w-6 text-white'/>,
+        icons: <LucideWand2 className='h-6 w-6 text-white'/>,
         label: 'Ai Image Gen',
         bgColor: 'bg-purple-600'
         
     },
     {
         icon: <Upload className='h-6 w-6 text-white'/>,
+        icons: <UploadCloud className='h-6 w-6 text-white'/>,
         label: 'Upload',
         bgColor: 'bg-gray-200'
         
@@ -265,27 +288,27 @@ export const drawPanelColorPreset = [
  export const Catalog = [
     {
         label: 'Your Design',
-        id: 1
+        id: 1,
+        icon: <Images className="w-5 h-5 text-gray-500 font-thin"/>
     },
     {
         label: 'Template',
-        id: 2
+        id: 2,
+        icon: <Mail className="w-5 h-5 text-gray-500 font-thin"/>
     },
     {
         label: 'Fabric-lab AI',
-        id: 3
+        id: 3,
+        icon: <SparklesIcon className="w-5 h-5 text-gray-500 font-thin"/>
     },
      
  ]
 
  export const NavLinks = [
     {
-        icon: <Home className="h-6 w-6"/>, label: 'Home', active: true
-        },
-    {
-        icon: <FolderOpen className="h-6 w-6"/>, label: 'Projects', active: false
+        icon: <FolderOpen className="h-6 w-6 "/>, label: 'Projects', active: false
     },
     {
-        icon: <CreditCard className="h-6 w-6"/>, label: 'Billing', active: false
+        icon: <CreditCard className="h-6 w-6 "/>, label: 'Billing', active: false
     },
  ]
