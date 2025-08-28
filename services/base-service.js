@@ -3,7 +3,9 @@ import { getSession } from "next-auth/react";
 
 const API_URL = process.env.API_URL || 'http://localhost:4000';
 
-export async function fetchWithAuth(endpoint, options = {}) {
+export async function fetchWithAuth(endpoint, options = {
+     query: ''
+}) {
     const session = await getSession();
 
     if (!session) {
@@ -19,7 +21,7 @@ export async function fetchWithAuth(endpoint, options = {}) {
                 ...options.headers,
             },
             data: options.body || options.data, // Use `data` instead of `body` for Axios
-            params: options.params,
+            params: {...options},
         });
 
         return response.data;

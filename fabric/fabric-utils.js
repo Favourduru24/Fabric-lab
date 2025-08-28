@@ -1,4 +1,4 @@
-import { resolve } from 'styled-jsx/css'
+import qs from 'query-string'
 import { createShape } from './shape-factory'
 import {shapeDefinitions } from './shape-utils'
 
@@ -301,4 +301,34 @@ export const toggleEraserMode = (canvas, isErasing, previousColor = '#000000', e
     } catch (error) {
       console.log('Failed to customize boundary box')
     }
+  }
+
+  export function formUrlQuery({ params, key, value }) {
+    const currentUrl = qs.parse(params)
+  
+    currentUrl[key] = value
+  
+    return qs.stringifyUrl(
+      {
+        url: window.location.pathname,
+        query: currentUrl,
+      },
+      { skipNull: true }
+    )
+  }
+
+  export function removeKeysFromQuery({ params, keysToRemove }) {
+    const currentUrl = qs.parse(params)
+  
+    keysToRemove.forEach(key => {
+      delete currentUrl[key]
+    })
+  
+    return qs.stringifyUrl(
+      {
+        url: window.location.pathname,
+        query: currentUrl,
+      },
+      { skipNull: true }
+    )
   }
