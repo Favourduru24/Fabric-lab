@@ -54,10 +54,10 @@ const Banner = () => {
     >
       <div className='flex flex-col sm:flex-row justify-center items-center mb-2 sm:mb-4 '>
           <Crown className='h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 text-yellow-300'/>
-          <span className='sm:ml-2 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium leading-tight'>Create Innovative Designs</span>
+          <span className='sm:ml-2 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium leading-10'>Create Innovative Designs</span>
       </div>
-      <h2 className='text-sm text-base md:text-lg font-bold mb-4 sm:mb-6 max-w-2xl mx-auto'>Design eye-caching thumbnails that get more views</h2>
-      <button className='text-[#8b3dff] bg-white hover:bg-gray-50/50 hover:text-white rounded-lg w-42 h-11 font-semibold cursor-pointer shadow-sm'
+      <h2 className='text-sm text-base md:text-lg font-bold mb-4 sm:mb-6 max-w-2xl mx-auto leading-6'>Design eye-caching thumbnails that get more views</h2>
+      <button className='text-[#8b3dff] bg-white hover:bg-gray-50/50 hover:text-white rounded-lg sm:w-42 h-11 sm:w-38 w-full font-semibold cursor-pointer shadow-sm'
        onClick={handleCreateNewDesign}
        >
         {loading ? (

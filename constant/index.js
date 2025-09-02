@@ -33,7 +33,7 @@ import {
 
 export const designTypes =[
     {
-        icon: <Youtube className='h-6 w-6 text-white'/>,
+        icon: <Youtube className='h-6 w-6 text-white '/>,
         icons: <Video className='h-6 w-6 text-white'/>,
         label: 'Youtube Thumbnail',
         bgColor: 'bg-red-500',
@@ -260,6 +260,33 @@ export const drawPanelColorPreset = [
      value: "dotted",
      label: "dotted",
     }
+ ]
+
+ export const DesignCategory = [
+    {
+        value: "All Designs",
+        label: "All Designs",
+    },
+    {
+        value: "Thumbnails",
+        label: "Thumbnails",
+    },
+    {
+     value: "Social Media",
+     label: "Social Media",
+    },
+    {
+     value: "Ai Background",
+     label: "Ai Background",
+    },
+    {
+     value: "Logo Design",
+     label: "Logo Design",
+    },
+    {
+     value: "Stickers",
+     label: "Stickers",
+    },
  ]
 
  export const imageFilter = [

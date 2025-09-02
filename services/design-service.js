@@ -5,9 +5,13 @@ export const getAllDesign = () => {
     return fetchWithAuth('/v1/design/get-all-design')
 }
 
-export const getUserDesign = () => {
-    return fetchWithAuth('/v1/design/get-user-design')
+export const getUserDesign = (params = {}) => {
+  return fetchWithAuth('/v1/design/get-user-design', { queryParams: params });
 }
+
+// export const getUserDesign = () => {
+//     return fetchWithAuth('/v1/design/get-user-design')
+// }
 
 export const getUserDesignById = (id) => {
     return fetchWithAuth(`/v1/design/get-user-design/${id}`)

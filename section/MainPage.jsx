@@ -8,7 +8,7 @@ import PremiumModel from '@/section/PremiumModel'
 import RecentDesign from '@/section/RecentDesign'
 import { getUserSubscription } from '@/services/subscription-service'
 import { useEditorStore } from '@/store'
-import {getUserDesign} from '@/services/design-service'
+import {getUserDesign, getAllDesign} from '@/services/design-service'
 import { useEffect, useRef } from 'react'
 import ProjectModel from '@/section/ProjectModel'
  
@@ -27,17 +27,29 @@ import ProjectModel from '@/section/ProjectModel'
 
   }
 
-   async function fetchUserDesign() {
-             const result = await getUserDesign({query})
-             setUserDesign(result?.data)
+   async function fetchUserDesigns() {
+  try {
+    // Build the filter object right here. It's clear and explicit.
+    const filters = {
+      query,
+      // page,
+      limit: 10,
+      // category: 'someCategory', // You can add these later easily
+      // date: '2024-01-01',
+    };
 
-          }
+    const result = await getUserDesign(filters);
+    setUserDesign(result?.data);
+  } catch (error) {
+    console.error('Failed to fetch designs:', error);
+  }
+}
 
    
 
   useEffect(() => {
      fetchUserSubscription()
-     fetchUserDesign()
+     fetchUserDesigns()
   },[])
 
   useEffect(() => {

@@ -77,7 +77,6 @@ const EditorDetails = () => {
 
          //  const response = await getUserDesignById(id)
             
-   //        console.log({response})
 
            const response = {
          data: {
@@ -208,7 +207,6 @@ const EditorDetails = () => {
          showProperties && isEditing &&  <Property/>
         }
     </div>
-    //#f0f0f0
   )
 }
 

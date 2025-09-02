@@ -85,7 +85,7 @@ const EditorSideBar = () => {
             </div>
            
          
-           <div className='w-full justify-center flex items-center mb-20'>
+           <div className='w-full justify-center flex items-center'>
              <div className='w-10 h-10 rounded-full bg-black'>
                <Image src="/vercel.svg" width={50} height={50} alt="user-img" className='size-full rounded-full object-cover'/>
              </div>    

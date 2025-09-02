@@ -27,11 +27,11 @@ const PremiumModel = ({isOpen, premiumModelRef}) => {
         {
           isOpen && (
             <div className='inset-0 fixed bg-black/50 flex items-center justify-center z-50' >
-              <div className='max-w-4xl w-full h-ft bg-white rounded-md shadow-sm shadow-white ring-3 relative flex items-start' >
-                <div className="flex items-cente  mt-4">
+              <div className='max-w-4xl w-full h-ft bg-white rounded-md shadow-sm shadow-white ring-3 relative flex items-start mx-2 lg:m-0' >
+                <div className="flex mt-4 flex-1">
 
-       <div className='flex flex-col p-3' ref={premiumModelRef}>
-                  <div>
+       <div className='flex flex-col p-3 w-full' ref={premiumModelRef}>
+                  <div className="w-full">
                        <h1 className='text-[1.7rem] text-gray-800 font-semibold'>Upgrade To Fabric-lab Premium</h1>
                <p className='text-[1rem] text-gray-600 font-medium mt-3'><span className='text-purple-600 text-lg'>Upgrade</span> to <span className='font-semibold text-lg'>fabric-lab</span> premium and create quality design.</p>
                   </div>
@@ -78,7 +78,7 @@ const PremiumModel = ({isOpen, premiumModelRef}) => {
                    
                  
                 </div>
-               <div className='hidden md:block md:w-[450px] h-[550px]'>
+               <div className='hidden md:block md:w-[430px] '>
                    <Image
                      alt='Team Collaboration'
                      src='/img1.png'

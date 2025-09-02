@@ -69,7 +69,7 @@ const DropDown = ({
                 key={option.label}
                 onClick={() => handleSelect(option.value)}
                 className={`px-4 py-2 cursor-pointer hover:bg-gray-50 ${
-                  value === option.value ? ' text-gray-400' : 'text-gray-400 font-semibold text-[1rem]'
+                  value === option.value ? ' text-gray-400 font-semibold' : 'text-gray-400 text-[1rem]'
                 }`}
               >
                  <div className='flex justify-between items-center gap-2' onClick={option.label === 'Viewing' ? handleIsViewing : handleIsEditing}>

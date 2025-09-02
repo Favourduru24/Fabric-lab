@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
 
-const CustomDropdown = ({ 
+const DesignDropdown = ({ 
   options, 
   value, 
   onChange, 
@@ -24,6 +24,10 @@ const CustomDropdown = ({
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
+  const handleSelect = (val) => {
+    onChange(val)
+    setIsOpen(false)
+  }
 
   return (
     <div 
@@ -33,9 +37,9 @@ const CustomDropdown = ({
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center justify-between px-4 py-2 text-left  rounded-md shadow-sm focus:ring-[#9E4B9E] h-10 w-full outline-none cursor-pointer"
+        className="flex items-center justify-between px-4 py-2 text-left bg-[#1F2225] border-[1.0px] border-[#4B4D4F] rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-[#9E4B9E] h-15 w-full"
       >
-        <span className='text-gray-400 font-medium text-lg'>{value || placeholder}</span>
+        <span>{value || placeholder}</span>
         <svg
           className={`w-5 h-5 ml-2 transition-transform ${isOpen ? 'rotate-180' : ''}`}
           fill="none"
@@ -48,31 +52,24 @@ const CustomDropdown = ({
 
       {/* Dropdown Options */}
       {isOpen && (
-        <div className={`${overflow ? '-top-40' : ''} absolute z-10 w-full mt-2 bg-[#ffffff] rounded-md shadow-lg flex items-center`}>
-          <ul className="py-1 overflow-auto text-base  focus:outline-none flex flex-col w-full">
-             
+        <div className={`${overflow ? '-top-0' : ''} absolute z-10 w-full mt-1 bg-black/70 border-[0.3px] border-[#4B4D4F] rounded-md shadow-lg`}>
+          <ul className="py-1 overflow-auto text-base  focus:outline-none">
             {options.map((option) => (
               <li
-                key={option.label}
-                onClick={() => {
-                  onChange(option.label) 
-                  setIsOpen(false)
-                }}
-                className={`px-4 py-2 cursor-pointer hover:bg-gray-50 w-full ${
-                  value === option.value ? 'text-gray-400 font-semibold' : 'text-gray-400 text-[1rem]'
+                key={option.id}
+                onClick={() => handleSelect(option.value)}
+                className={`px-4 py-2 cursor-pointer hover:bg-[#4B4D4F] ${
+                  value === option.value ? 'bg-black/40 text-[#9E4B9E]' : ''
                 }`}
               >
-                <p 
-                  style={{fontFamily: option.label}}
-                >{option.label}</p>
+                {option.value}
               </li>
             ))}
           </ul>
-             
         </div>
       )}
     </div>
   )
 }
 
-export default CustomDropdown
+export default DesignDropdown

@@ -91,6 +91,9 @@ export const useEditorStore = create((set, get) => ({
     colorDisplay: false,
     setColorDisplay: (flag) => set({colorDisplay: flag}),
 
+    designGridDisplay: 0,
+    setDesignGridDisplay: (flag) => set({designGridDisplay: flag}),
+
     catalogClicked: [],
     setCatalogClicked: (data) => set({catalogClicked: data}),
 
