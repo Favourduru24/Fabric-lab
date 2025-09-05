@@ -15,7 +15,7 @@ export default auth((req) => {
          return null
       }
 
-      if(isAuthUser) {
+      if(!isAuthUser) {
          return Response.redirect(new URL('/login', req.url))
       }
 })

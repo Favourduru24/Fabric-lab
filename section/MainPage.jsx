@@ -14,8 +14,6 @@ import ProjectModel from '@/section/ProjectModel'
  
  const MainPage = ({query}) => {
 
-   console.log({query})
-
   const {setUserSubscription, setUserDesign, showPremiumModal, setPremiumModal, projectModal, setProjectModal, userDesign, setColorDisplay} = useEditorStore()
   const projectModelRef = useRef()
   const premiumModelRef = useRef()
@@ -23,23 +21,18 @@ import ProjectModel from '@/section/ProjectModel'
    const fetchUserSubscription = async () => {
      const response = await getUserSubscription()
 
-      if(response?.success) setUserSubscription(response.data)
+      if(response?.success) setUserSubscription(response.data || [])
+        console.log({response})
 
   }
 
    async function fetchUserDesigns() {
   try {
     // Build the filter object right here. It's clear and explicit.
-    const filters = {
-      query,
-      // page,
-      limit: 10,
-      // category: 'someCategory', // You can add these later easily
-      // date: '2024-01-01',
-    };
+     
 
-    const result = await getUserDesign(filters);
-    setUserDesign(result?.data);
+    const result = await getUserDesign({query});
+    setUserDesign(result?.data?.data || []);
   } catch (error) {
     console.error('Failed to fetch designs:', error);
   }
@@ -50,7 +43,7 @@ import ProjectModel from '@/section/ProjectModel'
   useEffect(() => {
      fetchUserSubscription()
      fetchUserDesigns()
-  },[])
+  },[query])
 
   useEffect(() => {
     const closeUpdradePlan = (e) => {
