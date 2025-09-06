@@ -5,9 +5,10 @@
    const searchParam = await props.searchParams
 
    const query = (searchParam?.query) || ''
+   const category = (searchParam?.dropDowm) || ''
 
    return (
-     <MainPage query={query}/>
+     <MainPage query={query} category={category}/>
    )
  }
  

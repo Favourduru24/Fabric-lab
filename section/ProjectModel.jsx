@@ -1,7 +1,8 @@
 import { useEditorStore } from "@/store"
 import { Sparkle, X } from "lucide-react"
 import Link from 'next/link'
-import {DesignCategory} from '@/constant'
+import {DesignCategory, DateModified} from '@/constant'
+import DesignCard from './DesignCard'
 import CustomDropdown from "@/component/CustomDropDown"
 import Search from "@/component/Search"
 import {useState} from 'react'
@@ -12,6 +13,7 @@ const ProjectModel = ({isOpen, userDesign, projectModelRef}) => {
 
   const ArrayData = [1, 2, 3, 4, 5, 6, 7, 8, 9]
   const [dropDowm, setDropDown] = useState('')
+  const [date, setDate] = useState('')
   const router = useRouter()
   const searchParams = useSearchParams()
 
@@ -33,6 +35,24 @@ const ProjectModel = ({isOpen, userDesign, projectModelRef}) => {
    router.push(newUrl, {scroll: false})
 }
 
+  const onHandleDateChange = (date) => {
+  let newUrl = ''
+ if(date && date !== 'All Designs') {
+      newUrl = formUrlQuery({
+        params: searchParams.toString(),
+        key:'date',
+        value: date
+     })
+ } else{
+  newUrl = removeKeysFromQuery({
+    params: searchParams.toString(),
+    keysToRemove:['date'],
+ })
+ }
+
+   router.push(newUrl, {scroll: false})
+}
+
 
   return (
           <>
@@ -47,8 +67,15 @@ const ProjectModel = ({isOpen, userDesign, projectModelRef}) => {
                      <h1 className='text-[1.5rem] text-gray-700 font-semibold whitespace-nowrap'>Recents Project.</h1>
                       </div>
 
-                       <div className="md:w-[30rem] w-full">
-                           <Search/>
+                      <div className="md:w-[30rem] w-full">
+                           <CustomDropdown
+                           options={DateModified}
+                          placeholder="Date Modified"
+            value={date}
+            onChange={(value) => {
+                setDate(value) 
+                onHandleDateChange(value)
+            }}/>
                         </div>
 
                         <div className="md:w-[20rem] w-full">

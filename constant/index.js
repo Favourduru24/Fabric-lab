@@ -288,6 +288,32 @@ export const drawPanelColorPreset = [
      label: "Stickers",
     },
  ]
+ export const DateModified = [
+    {
+        value: "All Designs",
+        label: "All Designs",
+    },
+    {
+        value: "Today",
+        label: "today",
+    },
+    {
+        value: "Yesterday",
+        label: "yesterday",
+    },
+    {
+     value: "Last Week",
+     label: "last week",
+    },
+    {
+     value: "Last Month",
+     label: "last month",
+    },
+    {
+     value: "2 month ago",
+     label: "2 month ago",
+    },
+ ]
 
  export const imageFilter = [
     {

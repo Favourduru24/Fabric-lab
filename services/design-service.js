@@ -1,8 +1,10 @@
 import { fetchWithAuth } from "./base-service";
 import { getSession } from "next-auth/react"
 
-export const getAllDesign = () => {
-    return fetchWithAuth('/v1/design/get-all-design')
+export const getAllDesign = (params = {}) => {
+    return fetchWithAuth('/v1/design/get-all-design,', {
+         params: params
+    })
 }
 
 export const getUserDesign = (params = {}) => {
@@ -11,10 +13,7 @@ export const getUserDesign = (params = {}) => {
         });
     }
 
-// export const getUserDesign = () => {
-//     return fetchWithAuth('/v1/design/get-user-design')
-// }
-
+ 
 export const getUserDesignById = (id) => {
     return fetchWithAuth(`/v1/design/get-user-design/${id}`)
 }

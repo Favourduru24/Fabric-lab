@@ -64,7 +64,9 @@ const CustomDropdown = ({
               >
                 <p 
                   style={{fontFamily: option.label}}
-                >{option.label}</p>
+                >
+                  {option.label}
+                  </p>
               </li>
             ))}
           </ul>

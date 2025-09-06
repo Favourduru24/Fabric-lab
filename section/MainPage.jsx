@@ -12,9 +12,16 @@ import {getUserDesign, getAllDesign} from '@/services/design-service'
 import { useEffect, useRef } from 'react'
 import ProjectModel from '@/section/ProjectModel'
  
- const MainPage = ({query}) => {
+ const MainPage = ({query, category}) => {
 
-  const {setUserSubscription, setUserDesign, showPremiumModal, setPremiumModal, projectModal, setProjectModal, userDesign, setColorDisplay} = useEditorStore()
+  const {setUserSubscription,
+         setUserDesign,
+         showPremiumModal,
+         setPremiumModal,
+         projectModal,
+         setProjectModal,
+         setColorDisplay,
+        setDesign} = useEditorStore()
   const projectModelRef = useRef()
   const premiumModelRef = useRef()
 
@@ -22,17 +29,24 @@ import ProjectModel from '@/section/ProjectModel'
      const response = await getUserSubscription()
 
       if(response?.success) setUserSubscription(response.data || [])
-        console.log({response})
 
   }
 
    async function fetchUserDesigns() {
   try {
-    // Build the filter object right here. It's clear and explicit.
-     
 
-    const result = await getUserDesign({query});
+    const result = await getUserDesign({query, category});
     setUserDesign(result?.data?.data || []);
+  } catch (error) {
+    console.error('Failed to fetch designs:', error);
+  }
+}
+
+   async function fetchAllDesigns() {
+  try {
+
+    const result = await getAllDesign({query, category});
+    setDesign(result?.data?.data || []);
   } catch (error) {
     console.error('Failed to fetch designs:', error);
   }
@@ -43,6 +57,7 @@ import ProjectModel from '@/section/ProjectModel'
   useEffect(() => {
      fetchUserSubscription()
      fetchUserDesigns()
+     fetchAllDesigns()
   },[query])
 
   useEffect(() => {

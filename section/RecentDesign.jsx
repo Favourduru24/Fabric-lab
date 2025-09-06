@@ -1,5 +1,5 @@
 'use client'
-import {deleteDesign, getUserDesign, getUserDesignById} from '@/services/design-service'
+import {deleteDesign, getUserDesign, getUserDesignById, getAllDesign} from '@/services/design-service'
 import Link from 'next/link'
 
 
@@ -9,7 +9,7 @@ import { useEditorStore } from '@/store'
 
 const RecentDesign = () => {
 
-      const {designGridDisplay, setDesignGridDisplay, userDesign} = useEditorStore()
+      const {designGridDisplay, setDesignGridDisplay, userDesign, design} = useEditorStore()
 
       const handleDeleteDesign = async (designId) => {
         const response = await deleteDesign(designId)
@@ -19,7 +19,7 @@ const RecentDesign = () => {
        const ArrayData2 = [1, 2, 3, 4, 5, 6, 7, 8, 9]
        const ArrayData3 = [1, 2, 3, 4, 5, 6, 7, 8]
 
-      
+        console.log({design})
 
   return (
     <div className='flex flex-col'>
@@ -32,6 +32,18 @@ const RecentDesign = () => {
             <div className='sm:h-[300px] h-[200px] rounded-lg mb-2 overflow-hidden transition-shadow group-hover:shadow-md p-2 bg-gray-50'>
                   {
                    design.canvasData && <DesignCard design={design} key={design._id}/> 
+                  }             
+            </div>
+             </div>
+             </Link>
+        ))} */}
+
+        {/* {design.map((des) => (
+           <Link href={`/editor/${des._id}`} key={des._id}> 
+             <div className='group cursor-pointer'>
+            <div className='sm:h-[300px] h-[200px] rounded-lg mb-2 overflow-hidden transition-shadow group-hover:shadow-md p-2 bg-gray-50'>
+                  {
+                   des.canvasData && <DesignCard design={des} key={des._id}/> 
                   }             
             </div>
              </div>
