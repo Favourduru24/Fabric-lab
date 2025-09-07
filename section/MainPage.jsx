@@ -11,6 +11,7 @@ import { useEditorStore } from '@/store'
 import {getUserDesign, getAllDesign} from '@/services/design-service'
 import { useEffect, useRef } from 'react'
 import ProjectModel from '@/section/ProjectModel'
+import {useGetDesignQuery} from '@/features/design/designApiSlice'
  
  const MainPage = ({query, category}) => {
 
@@ -25,40 +26,72 @@ import ProjectModel from '@/section/ProjectModel'
   const projectModelRef = useRef()
   const premiumModelRef = useRef()
 
-   const fetchUserSubscription = async () => {
-     const response = await getUserSubscription()
+  const {isLoading, isSucces, data} = useGetDesignQuery()
 
-      if(response?.success) setUserSubscription(response.data || [])
+  //  const fetchUserSubscription = async () => {
+  //    const response = await getUserSubscription()
 
-  }
+  //     if(response?.success) setUserSubscription(response.data || [])
 
-   async function fetchUserDesigns() {
-  try {
+  // }
+  console.log('Redux User Data', data)
+//    async function fetchUserDesigns() {
+//   try {
 
-    const result = await getUserDesign({query, category});
-    setUserDesign(result?.data?.data || []);
-  } catch (error) {
-    console.error('Failed to fetch designs:', error);
-  }
-}
+//     const result = await getUserDesign({query, category});
+//     setUserDesign(result?.data?.data || []);
+//   } catch (error) {
+//     console.error('Failed to fetch designs:', error);
+//   }
+// }
 
-   async function fetchAllDesigns() {
-  try {
+//    async function fetchAllDesigns() {
+//   try {
 
-    const result = await getAllDesign({query, category});
-    setDesign(result?.data?.data || []);
-  } catch (error) {
-    console.error('Failed to fetch designs:', error);
-  }
-}
+//     const result = await getAllDesign({query, category});
+//     setDesign(result?.data || []);
+//   } catch (error) {
+//     console.error('Failed to fetch designs:', error);
+//   }
+// }
 
    
 
-  useEffect(() => {
-     fetchUserSubscription()
-     fetchUserDesigns()
-     fetchAllDesigns()
-  },[query])
+//   useEffect(() => {
+//      fetchUserSubscription()
+//      fetchUserDesigns()
+//      fetchAllDesigns()
+//   },[query])
+
+useEffect(() => {
+  const fetchSub = async () => {
+    const response = await getUserSubscription();
+    if (response?.success) setUserSubscription(response.data || []);
+  };
+  fetchSub();
+}, []);
+
+// Fetch designs when query or category changes
+// useEffect(() => {
+//   const fetchDesigns = async () => {
+//     try {
+//       const userResult = await getUserDesign({ query, category })
+//       const allResult = await getAllDesign({ query: query, category: category });
+      
+//       // Add debug logging
+//       console.log('User designs response:', userResult);
+//       console.log('All designs response:', allResult);
+      
+//       // Correct data access paths
+//       setUserDesign(userResult?.data?.data || []);  // userResult.data contains the array
+//       setDesign(allResult?.data.data || []);  // allResult.data contains the array
+//     } catch (error) {
+//       console.error('Failed to fetch designs:', error);
+//     }
+//   };
+  
+//   fetchDesigns();
+// }, []);
 
   useEffect(() => {
     const closeUpdradePlan = (e) => {

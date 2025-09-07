@@ -106,11 +106,13 @@ const ProjectModel = ({isOpen, userDesign, projectModelRef}) => {
              </div>
              </Link>
         ))} */}
-        {ArrayData.map((design) => (
-           <Link href={`/editor/${design}`} key={design}> 
+        {userDesign?.map((design) => (
+           <Link href={`/editor/${design._id}`} key={design._id}> 
              <div className='group cursor-pointer'>
-            <div className='sm:h-[300px] h-[200px] rounded-lg mb-2 overflow-hidden transition-shadow group-hover:shadow-md p-2 bg-gray-50'>
-                   {design}           
+            <div className='h-[300px] rounded-lg mb-2 overflow-hidden transition-shadow group-hover:shadow-md p-2'>
+                  {
+                   design.canvasData && <DesignCard design={design} key={design._id}/> 
+                  }             
             </div>
              </div>
              </Link>

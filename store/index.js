@@ -83,7 +83,7 @@ export const useEditorStore = create((set, get) => ({
     setUserDesign: (data) => set({userDesign: data}),
 
     design: [],
-    setDesign: (data) => set({userDesign: data}),
+    setDesign: (data) => set({design: data}),
 
     showPremiumModal: false,
     setPremiumModal: (flag) => set({showPremiumModal: flag}),

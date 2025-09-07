@@ -19,7 +19,7 @@ const RecentDesign = () => {
        const ArrayData2 = [1, 2, 3, 4, 5, 6, 7, 8, 9]
        const ArrayData3 = [1, 2, 3, 4, 5, 6, 7, 8]
 
-        console.log({design})
+        console.log({userDesign, design})
 
   return (
     <div className='flex flex-col'>
@@ -60,15 +60,17 @@ const RecentDesign = () => {
              </div>
              </Link>
         )) : designGridDisplay === 2 ?
-        ArrayData2.map((design) => (
-           <Link href={`/editor/${design}`} key={design}> 
+        design.map((des) => (
+           <Link href={`/editor/${des._id}`} key={des._id}> 
              <div className='group cursor-pointer'>
             <div className='sm:h-[300px] h-[200px] rounded-lg mb-2 overflow-hidden transition-shadow group-hover:shadow-md p-2 bg-gray-50'>
-                   {design}           
+                  {
+                   des.canvasData && <DesignCard design={des} key={des._id}/> 
+                  }             
             </div>
              </div>
              </Link>
-         )) :
+        )) :
          ArrayData3.map((design) => (
            <Link href={`/editor/${design}`} key={design}> 
              <div className='group cursor-pointer'>

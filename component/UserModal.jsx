@@ -36,7 +36,7 @@ const UserModal = () => {
 
          </div> )}
       <div className='w-10 h-10 rounded-full bg-black '>
-                        {/* <Image src={`${session?.user?.image}`} width={50} height={50} alt="user-img" className='size-full rounded-full object-cover' /> */}
+                        {/* <Image src={session?.user?.image} width={50} height={50} alt="user-img" className='size-full rounded-full object-cover' /> */}
                         </div>  
                         <p className="text-gray-400 text-xs font-semibold sm:text-[1rem] text-xs hidden md:flex">Duru Pristine</p>
     </div>
