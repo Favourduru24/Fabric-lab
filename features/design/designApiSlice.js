@@ -29,7 +29,11 @@ export const designsApiSlice = apiSlice.injectEndpoints({
           
           transformResponse: responseData => {
             // Transform the data before normalization
-            const loadedDesigns = responseData.data.map(design => ({  
+            const designsArray = Array.isArray(responseData.data) 
+    ? responseData.data 
+    : [];
+            console.log({responseData})
+            const loadedDesigns = designsArray.map(design => ({  
               ...design,
               id: design._id 
             }));
@@ -38,18 +42,25 @@ export const designsApiSlice = apiSlice.injectEndpoints({
           },
           
           providesTags: (result, error, arg) => {
-            if(result?.ids){
-              return [
-                { type: 'Design', id: 'LIST' },
-                ...result.ids.map(id => ({ type: 'Design', id }))
-              ]
-            } else {
-              return [{ type: 'Design', id: 'LIST' }]
-            }
-          }
+        if(result?.ids){
+          return [
+            { type: 'Design', id: 'LIST' },
+            ...result.ids.map(id => ({ type: 'Design', id }))
+          ]
+        } else {
+          return [{ type: 'Design', id: 'LIST' }]
+        }
+      }
         }),
         getUserDesign: builder.query({
-          query: (userId) => `/feeds/feed/user/${userId}`,
+         query: ({userId, query = '', page = 1, limit = 5}) => ({
+            url: `/v1/design/user/${userId}`,
+           params: {
+      query,
+      page,
+      limit,
+    }
+  }),
              validateStatus: (response, result) => {
                     return response.status === 200 && !result.isError
              },
@@ -88,7 +99,7 @@ export const designsApiSlice = apiSlice.injectEndpoints({
       } = designsApiSlice
 
 // returns the query result object
-export const selectFeedsResult = designsApiSlice.endpoints.getDesign.select()
+export const selectDesignsResult = designsApiSlice.endpoints.getDesign.select()
 
 // creates memoized selector
 const selectDesignsData = createSelector(

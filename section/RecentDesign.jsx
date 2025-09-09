@@ -1,20 +1,23 @@
 'use client'
 import {deleteDesign, getUserDesign, getUserDesignById, getAllDesign} from '@/services/design-service'
 import Link from 'next/link'
+import {useGetDesignQuery} from '@/features/design/designApiSlice'
+ 
 
 
 import DesignCard from './DesignCard'
 import { useEditorStore } from '@/store'
 
 
-const RecentDesign = () => {
+const RecentDesign = ({ query}) => {
 
       const {designGridDisplay, setDesignGridDisplay, userDesign, design} = useEditorStore()
 
       const handleDeleteDesign = async (designId) => {
         const response = await deleteDesign(designId)
       }
-
+const {data, isLoading, isSuccess} = useGetDesignQuery({query})
+const {entities, ids} = data || {}
        const ArrayData1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
        const ArrayData2 = [1, 2, 3, 4, 5, 6, 7, 8, 9]
        const ArrayData3 = [1, 2, 3, 4, 5, 6, 7, 8]
@@ -38,7 +41,8 @@ const RecentDesign = () => {
              </Link>
         ))} */}
 
-        {/* {design.map((des) => (
+        {/* {id.map((design) => {
+            const des = entities[des]
            <Link href={`/editor/${des._id}`} key={des._id}> 
              <div className='group cursor-pointer'>
             <div className='sm:h-[300px] h-[200px] rounded-lg mb-2 overflow-hidden transition-shadow group-hover:shadow-md p-2 bg-gray-50'>
@@ -48,7 +52,7 @@ const RecentDesign = () => {
             </div>
              </div>
              </Link>
-        ))} */}
+        })} */}
         {designGridDisplay === 1 ?  userDesign?.map((design) => (
            <Link href={`/editor/${design._id}`} key={design._id}> 
              <div className='group cursor-pointer'>
@@ -60,8 +64,10 @@ const RecentDesign = () => {
              </div>
              </Link>
         )) : designGridDisplay === 2 ?
-        design.map((des) => (
-           <Link href={`/editor/${des._id}`} key={des._id}> 
+        ids?.map((design) => {
+            const des = entities[design]
+            return (
+            <Link href={`/editor/${des._id}`} key={des._id}> 
              <div className='group cursor-pointer'>
             <div className='sm:h-[300px] h-[200px] rounded-lg mb-2 overflow-hidden transition-shadow group-hover:shadow-md p-2 bg-gray-50'>
                   {
@@ -70,7 +76,9 @@ const RecentDesign = () => {
             </div>
              </div>
              </Link>
-        )) :
+            )
+           
+        }) :
          ArrayData3.map((design) => (
            <Link href={`/editor/${design}`} key={design}> 
              <div className='group cursor-pointer'>

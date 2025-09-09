@@ -26,7 +26,7 @@ import {useGetDesignQuery} from '@/features/design/designApiSlice'
   const projectModelRef = useRef()
   const premiumModelRef = useRef()
 
-  const {isLoading, isSucces, data} = useGetDesignQuery()
+  const {data, isLoading, isSuccess} = useGetDesignQuery({query})
 
   //  const fetchUserSubscription = async () => {
   //    const response = await getUserSubscription()
@@ -35,6 +35,8 @@ import {useGetDesignQuery} from '@/features/design/designApiSlice'
 
   // }
   console.log('Redux User Data', data)
+  const {entities, ids} = data || {}
+
 //    async function fetchUserDesigns() {
 //   try {
 
@@ -58,10 +60,10 @@ import {useGetDesignQuery} from '@/features/design/designApiSlice'
    
 
 //   useEffect(() => {
-//      fetchUserSubscription()
-//      fetchUserDesigns()
-//      fetchAllDesigns()
-//   },[query])
+//      if(isSuccess) {
+    //  setDesign(data)
+// }
+//   },[])
 
 useEffect(() => {
   const fetchSub = async () => {
@@ -118,7 +120,7 @@ useEffect(() => {
                 <Banner/>
                 <DesignType />
                 <AiFeaures/>
-                <RecentDesign/>
+                <RecentDesign id={ids} entities={entities} query={query}/>
             </main>
          </div>
         <PremiumModel isOpen={showPremiumModal}  premiumModelRef={premiumModelRef}/>
