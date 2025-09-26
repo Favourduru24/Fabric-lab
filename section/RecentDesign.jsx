@@ -2,7 +2,7 @@
 import {deleteDesign, getUserDesign, getUserDesignById, getAllDesign} from '@/services/design-service'
 import Link from 'next/link'
 import {useGetDesignQuery} from '@/features/design/designApiSlice'
- 
+import { useSession } from "next-auth/react"
 
 
 import DesignCard from './DesignCard'
@@ -16,13 +16,20 @@ const RecentDesign = ({ query}) => {
       const handleDeleteDesign = async (designId) => {
         const response = await deleteDesign(designId)
       }
-const {data, isLoading, isSuccess} = useGetDesignQuery({query})
-const {entities, ids} = data || {}
+       const {data:session } = useSession()
+        const userId = session?.idToken
+       console.log({session})
+
+      const {data, isLoading, isSuccess} = useGetDesignQuery({query})
+      const {data: userDes} = getUserDesign({userId})
+      const {entities, ids} = data || {}
        const ArrayData1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
        const ArrayData2 = [1, 2, 3, 4, 5, 6, 7, 8, 9]
        const ArrayData3 = [1, 2, 3, 4, 5, 6, 7, 8]
 
-        console.log({userDesign, design})
+
+
+        console.log({entities, userDes})
 
   return (
     <div className='flex flex-col'>

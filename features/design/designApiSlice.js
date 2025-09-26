@@ -54,7 +54,7 @@ export const designsApiSlice = apiSlice.injectEndpoints({
         }),
         getUserDesign: builder.query({
          query: ({userId, query = '', page = 1, limit = 5}) => ({
-            url: `/v1/design/user/${userId}`,
+            url: `/v1/design/get-user-design`,
            params: {
       query,
       page,
