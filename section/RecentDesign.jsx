@@ -9,20 +9,19 @@ import DesignCard from './DesignCard'
 import { useEditorStore } from '@/store'
 
 
-const RecentDesign = ({ query}) => {
+const RecentDesign = ({query}) => {
 
       const {designGridDisplay, setDesignGridDisplay, userDesign, design} = useEditorStore()
 
       const handleDeleteDesign = async (designId) => {
         const response = await deleteDesign(designId)
       }
-       const {data:session } = useSession()
-        const userId = session?.idToken
-       console.log({session})
+        
 
       const {data, isLoading, isSuccess} = useGetDesignQuery({query})
-      const {data: userDes} = getUserDesign({userId})
-      const {entities, ids} = data || {}
+      const {data: userDes} = getUserDesign({query})
+      const {entities, ids} = data?.designs || {}
+
        const ArrayData1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
        const ArrayData2 = [1, 2, 3, 4, 5, 6, 7, 8, 9]
        const ArrayData3 = [1, 2, 3, 4, 5, 6, 7, 8]
